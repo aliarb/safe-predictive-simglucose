@@ -4,6 +4,8 @@
 [![Downloads](https://static.pepy.tech/badge/simglucose/month)](https://pepy.tech/project/simglucose)
 [![Downloads](https://static.pepy.tech/badge/simglucose/week)](https://pepy.tech/project/simglucose)
 
+> **Note**: This is a fork of the original [simglucose](https://github.com/jxx123/simglucose) repository. This fork extends the original simulator by implementing a **safe nonlinear model predictive controller (NMPC) with integrated control barrier functions (CBF)** for glucose level control through artificial insulin injection. The original simulator functionality remains intact and fully available.
+
 A Type-1 Diabetes simulator implemented in Python for Reinforcement Learning purpose
 
 This simulator is a python implementation of the FDA-approved [UVa/Padova Simulator (2008 version)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4454102/) for research purpose only. The simulator includes 30 virtual patients, 10 adolescents, 10 adults, 10 children. There is [documentation of the virtual patient's parameters](https://github.com/jxx123/simglucose/blob/master/definitions_of_vpatient_parameters.md).
