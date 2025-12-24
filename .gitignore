@@ -1,6 +1,9 @@
 # Compiled python modules.
 *.pyc
 
+# Virtual environment
+venv/
+
 # results foler
 /results/
 
