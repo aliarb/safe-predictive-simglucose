@@ -109,6 +109,13 @@ class NMPCTuningEnv(gym.Env):
         self.current_obs = None
         self.current_info = None
         
+        # Store current parameters
+        self.current_q_weight = 1.0
+        self.current_r_weight = 0.1
+        self.current_prediction_horizon = 60
+        self.current_control_horizon = 30
+        self.current_opt_rate = 1.0
+        
         # Create initial environment
         self._create_env()
     
@@ -243,23 +250,23 @@ class NMPCTuningEnv(gym.Env):
         """
         # Create/update controller with new parameters (only on first step or if not created)
         if self.current_step == 0 or self.controller is None:
-            q_weight = float(action[0])
-            r_weight = float(action[1])
-            prediction_horizon = int(action[2])
-            control_horizon = int(action[3])
-            opt_rate = float(action[4])
+            self.current_q_weight = float(action[0])
+            self.current_r_weight = float(action[1])
+            self.current_prediction_horizon = int(action[2])
+            self.current_control_horizon = int(action[3])
+            self.current_opt_rate = float(action[4])
             
             self.controller = NMPCController(
                 target_bg=140.0,
-                prediction_horizon=prediction_horizon,
-                control_horizon=control_horizon,
+                prediction_horizon=self.current_prediction_horizon,
+                control_horizon=self.current_control_horizon,
                 sample_time=5.0,
-                q_weight=q_weight,
-                r_weight=r_weight,
+                q_weight=self.current_q_weight,
+                r_weight=self.current_r_weight,
                 bg_min=70.0,
                 bg_max=180.0
             )
-            self.controller.opt_rate = opt_rate
+            self.controller.opt_rate = self.current_opt_rate
         
         # Get current observation and step environment
         if self.current_step == 0:
@@ -328,11 +335,11 @@ class NMPCTuningEnv(gym.Env):
             'cgm': cgm,
             'risk': risk,
             'step': self.current_step,
-            'q_weight': q_weight,
-            'r_weight': r_weight,
-            'prediction_horizon': prediction_horizon,
-            'control_horizon': control_horizon,
-            'opt_rate': opt_rate,
+            'q_weight': self.current_q_weight,
+            'r_weight': self.current_r_weight,
+            'prediction_horizon': self.current_prediction_horizon,
+            'control_horizon': self.current_control_horizon,
+            'opt_rate': self.current_opt_rate,
         }
         
         return observation, reward, terminated, truncated, info_dict
