@@ -792,5 +792,5 @@ class NMPCController(Controller):
         self.solver_initialized = False
         self.prediction_history = []
         self.optimization_history = []
-        super().reset()
+        # Note: Don't call super().reset() as base class raises NotImplementedError
 
