@@ -50,6 +50,9 @@ class NMPCController(Controller):
         Minimum safe blood glucose level in mg/dL (default: 70)
     bg_max : float, optional
         Maximum safe blood glucose level in mg/dL (default: 180)
+    barrier_weight : float, optional
+        Weight for barrier function penalty J_G(t) in objective function (default: 10.0)
+        Higher values enforce stricter safety constraints
     patient_params : dict, optional
         Patient-specific parameters (if None, will be loaded from info)
     """
@@ -63,6 +66,7 @@ class NMPCController(Controller):
                  r_weight: float = 0.1,
                  bg_min: float = 70.0,
                  bg_max: float = 180.0,
+                 barrier_weight: float = 10.0,
                  patient_params: Optional[Dict[str, Any]] = None,
                  init_state: Optional[np.ndarray] = None):
         """
@@ -82,6 +86,7 @@ class NMPCController(Controller):
         self.r_weight = r_weight
         self.bg_min = bg_min
         self.bg_max = bg_max
+        self.barrier_weight = barrier_weight  # Weight for barrier function penalty
         
         # Patient parameters (will be set from info if not provided)
         self.patient_params = patient_params
@@ -93,10 +98,10 @@ class NMPCController(Controller):
         
         # Optimization parameters (from MATLAB code)
         self.NP = prediction_horizon  # Prediction steps
-        self.Nopt = 20  # Max number of optimization iterations
+        self.Nopt = 100  # Max number of optimization iterations
         self.opt_rate = 1.0  # Learning rate of optimization method
         self.acc = 1e-3  # Minimum accuracy of optimization method
-        self.max_time = 0.1  # Maximum computation time (seconds)
+        self.max_time = 100  # Maximum computation time (seconds)
         
         # Control parameters
         self.insulin_max = 10.0  # Maximum insulin rate (U/min)
@@ -387,7 +392,13 @@ class NMPCController(Controller):
             # Control cost: u^2 (penalize large insulin)
             control_cost = 0.0 * (u[0]**2)  # Can be enabled with weight
             
-            J += 1.0 * tracking_error + control_cost
+            # Glucose barrier function penalty J_G(t) at each step
+            # Implements Eq. (JG): J_G(t) = G(t) - G_max if G > G_max,
+            #                      J_G(t) = G(t) - G_min if G < G_min,
+            #                      J_G(t) = 0 otherwise
+            barrier_penalty_step = self._glucose_barrier_function(bg_pred)
+            
+            J += 1.0 * tracking_error + control_cost + self.barrier_weight * abs(barrier_penalty_step)
             dz0 = dz.copy()
         
         # Penalty for constraint violation (insulin bounds)
@@ -401,9 +412,9 @@ class NMPCController(Controller):
         terminal_cost = 1.0 * (bg_final - bg_target)**2
         J += terminal_cost
         
-        # Safety barrier function cost (control barrier function)
-        safety_barrier_cost = 0.002 * self._safety_barrier_function(z[:, -1], out[:, -1], 0)
-        J += safety_barrier_cost
+        # Terminal barrier function penalty
+        terminal_barrier = self._glucose_barrier_function(bg_final)
+        J += self.barrier_weight * abs(terminal_barrier)
         
         return J
     
@@ -489,6 +500,38 @@ class NMPCController(Controller):
         dxdt = T1DPatient.model(t, x, action, params, last_Qsto, last_foodtaken)
         return dxdt
     
+    def _glucose_barrier_function(self, G):
+        """
+        Glucose safe range barrier function J_G(t) as defined in Eq. (JG).
+        
+        Implements the control barrier function:
+        J_G(t) = G(t) - G_max  if G(t) > G_max
+                = G(t) - G_min  if G(t) < G_min
+                = 0             if G_min < G(t) < G_max
+        
+        This barrier function is used as a penalty term in the NMPC objective
+        function to ensure glucose stays within safe bounds [G_min, G_max].
+        
+        Parameters
+        ----------
+        G : float
+            Current glucose level (mg/dL)
+        
+        Returns
+        -------
+        J_G : float
+            Barrier function value
+            - Positive if G > G_max (penalty for hyperglycemia)
+            - Negative if G < G_min (penalty for hypoglycemia)
+            - Zero if G_min <= G <= G_max (no penalty)
+        """
+        if G > self.bg_max:
+            return G - self.bg_max
+        elif G < self.bg_min:
+            return G - self.bg_min
+        else:
+            return 0.0
+    
     def _safety_barrier_function(self, x, other, bound):
         """
         Safety barrier function (control barrier function).
@@ -515,15 +558,12 @@ class NMPCController(Controller):
         Vg = self._get_param('Vg', 1.0)
         bg = x[3] * Vg  # Blood glucose in mg/dL
         
-        # Safety bounds
-        bg_safe_lower = self.bg_min
-        bg_safe_upper = self.bg_max
+        # Use the glucose barrier function
+        j = abs(self._glucose_barrier_function(bg))
         
-        # Penalty if outside safe bounds
-        if bg > bg_safe_upper or bg < bg_safe_lower:
-            j = 1.0 * ((bg - self.target_bg)**2)
-        else:
-            j = 0.0
+        # Scale penalty (squared for stronger penalty)
+        if j > 0:
+            j = j**2
         
         return j
     
