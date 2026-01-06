@@ -7,6 +7,9 @@ venv/
 # results foler
 /results/
 
+# Paper folder and subfolders
+/Paper/
+
 # Setuptools distribution folder.
 /dist/
 /build/
