@@ -83,7 +83,7 @@ all_results['PID'] = results2
 print("   ✓ Complete")
 
 # ========== 3. NMPC CONTROLLER (WITH CONSTRAINTS) ==========
-print("\n[3/4] Running NMPC Controller with Constraints...")
+print("\n[3/3] Running NMPC Controller with Constraints...")
 env3 = T1DSimEnv(patient, sensor, pump, scenario)
 controller3 = NMPCController(
     target_bg=140.0,
@@ -98,31 +98,13 @@ controller3 = NMPCController(
 )
 sim_obj3 = SimObj(env3, controller3, timedelta(days=1), animate=False, path=comparison_path)
 results3 = sim(sim_obj3)
-all_results['NMPC (Constrained)'] = results3
+all_results['Safe-NMPC'] = results3
 print("   ✓ Complete")
 print(f"      Constraint bounds: [{controller3.bg_min}, {controller3.bg_max}] mg/dL")
 print(f"      Barrier weight: {controller3.barrier_weight}")
 
-# ========== 4. NMPC CONTROLLER (HIGH CONSTRAINT WEIGHT) ==========
-print("\n[4/4] Running NMPC Controller with Strict Constraints...")
-env4 = T1DSimEnv(patient, sensor, pump, scenario)
-controller4 = NMPCController(
-    target_bg=140.0,
-    prediction_horizon=60,
-    control_horizon=30,
-    sample_time=5.0,
-    q_weight=1.0,
-    r_weight=0.1,
-    bg_min=70.0,
-    bg_max=180.0,
-    barrier_weight=50.0  # Higher constraint enforcement
-)
-sim_obj4 = SimObj(env4, controller4, timedelta(days=1), animate=False, path=comparison_path)
-results4 = sim(sim_obj4)
-all_results['NMPC (Strict Constraints)'] = results4
-print("   ✓ Complete")
-print(f"      Constraint bounds: [{controller4.bg_min}, {controller4.bg_max}] mg/dL")
-print(f"      Barrier weight: {controller4.barrier_weight}")
+# Note: Removed duplicate NMPC controller since both produce identical results
+# The PID-first architecture means barrier_weight has minimal effect
 
 # ========== CALCULATE COMPREHENSIVE STATISTICS ==========
 print("\n" + "=" * 80)
@@ -380,8 +362,7 @@ plt.rcParams.update({
 colors = {
     'Basal-Bolus': '#2E86AB',
     'PID': '#A23B72',
-    'NMPC (Constrained)': '#F18F01',
-    'NMPC (Strict Constraints)': '#C73E1D'
+    'Safe-NMPC': '#57068C'  # NYU/CCNY Purple
 }
 
 # Create comprehensive figure with more subplots for insulin
@@ -506,7 +487,7 @@ ax8.grid(True, alpha=0.3, linestyle='--')
 ax8.set_xlim(0, 24)
 
 # Overall title
-fig.suptitle('Controller Performance Comparison: NMPC with Constraints vs Baseline Methods',
+fig.suptitle('Controller Performance Comparison: Safe-NMPC vs Baseline Methods',
             fontsize=16, fontweight='bold', y=0.98)
 
 # Save figures

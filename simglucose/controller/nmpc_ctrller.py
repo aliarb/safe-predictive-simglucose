@@ -79,6 +79,23 @@ class NMPCController(Controller):
     barrier_weight : float, optional
         Weight for barrier function penalty J_G(t) in objective function (default: 10.0)
         Higher values enforce stricter safety constraints
+    # Cost function tuning parameters (for RL optimization)
+    q_terminal_weight : float, optional
+        Weight for terminal state tracking cost (default: 2.0)
+    r_delta_weight : float, optional
+        Weight for rate of change penalty (ΔU) (default: 0.5)
+    hypo_penalty_weight : float, optional
+        Weight for hypoglycemia penalty (default: 50.0)
+    hyper_penalty_weight : float, optional
+        Weight for hyperglycemia penalty (default: 20.0)
+    zone_transition_smoothness : float, optional
+        Smoothness parameter for zone transitions (default: 5.0)
+        Higher values = sharper transitions, lower = smoother
+    insulin_rate_penalty_weight : float, optional
+        Weight for insulin rate constraint violation (default: 100.0)
+    delta_u_asymmetry : float, optional
+        Asymmetry factor for ΔU penalty (default: 2.0)
+        Penalty for increases = delta_u_asymmetry * penalty for decreases
     patient_params : dict, optional
         Patient-specific parameters (if None, will be loaded from info)
     """
@@ -94,6 +111,14 @@ class NMPCController(Controller):
                  bg_min: float = 70.0,
                  bg_max: float = 180.0,
                  barrier_weight: float = 10.0,
+                 # Cost function tuning parameters (for RL optimization)
+                 q_terminal_weight: float = 2.0,
+                 r_delta_weight: float = 0.5,
+                 hypo_penalty_weight: float = 50.0,
+                 hyper_penalty_weight: float = 20.0,
+                 zone_transition_smoothness: float = 5.0,
+                 insulin_rate_penalty_weight: float = 100.0,
+                 delta_u_asymmetry: float = 2.0,
                  patient_params: Optional[Dict[str, Any]] = None,
                  init_state: Optional[np.ndarray] = None):
         """
@@ -115,6 +140,15 @@ class NMPCController(Controller):
         self.bg_min = bg_min
         self.bg_max = bg_max
         self.barrier_weight = barrier_weight  # Weight for barrier function penalty
+        
+        # Cost function tuning parameters (for RL optimization)
+        self.q_terminal_weight = q_terminal_weight
+        self.r_delta_weight = r_delta_weight
+        self.hypo_penalty_weight = hypo_penalty_weight
+        self.hyper_penalty_weight = hyper_penalty_weight
+        self.zone_transition_smoothness = zone_transition_smoothness
+        self.insulin_rate_penalty_weight = insulin_rate_penalty_weight
+        self.delta_u_asymmetry = delta_u_asymmetry
         
         # Patient parameters (will be set from info if not provided)
         self.patient_params = patient_params
@@ -772,10 +806,27 @@ class NMPCController(Controller):
     
     def _mainfun(self, xd, x, delta_u, DelT, NP, other):
         """
-        Main objective function for NMPC.
+        Main objective function for NMPC with comprehensive, continuous cost components.
         
-        Now optimizes ΔU (change in insulin) instead of U (absolute insulin).
-        This provides smoother control and reduces control effort.
+        This cost function is designed to be:
+        - Continuous and differentiable (smooth transitions)
+        - Parameterized for RL optimization
+        - Based on MPC best practices
+        
+        Cost Components:
+        ---------------
+        1. Tracking cost: Quadratic error from target BG
+        2. Control effort: Penalty on rate of change (ΔU) with asymmetry
+        3. Barrier function: Smooth CBF penalty for safety bounds
+        4. Zone penalties: Different penalties for hypo/normal/hyper zones
+        5. Predictive CBF: Context-aware control cost adjustment
+        6. Insulin rate constraints: Smooth penalty for bound violations
+        7. Rate of change constraints: Adaptive, smooth ΔU limits
+        8. Terminal tracking: Final state tracking cost
+        9. Terminal barrier: Final state safety penalty
+        10. Terminal zone: Final state zone penalty
+        
+        All functions use smooth sigmoid transitions for continuity.
         
         Parameters
         ----------
@@ -795,7 +846,7 @@ class NMPCController(Controller):
         Returns
         -------
         J : float
-            Objective function value (cost)
+            Objective function value (cost) - continuous and differentiable
         """
         J = 0
         z = np.zeros((len(x), NP + 1))
@@ -886,51 +937,48 @@ class NMPCController(Controller):
             if not np.isfinite(bg_target):
                 bg_target = self.target_bg
             
-            # Tracking cost: (BG - target)^2
+            # ========== COST FUNCTION COMPONENTS (All Continuous) ==========
+            
+            # 1. Tracking cost: Quadratic tracking error
             tracking_error = (bg_pred - bg_target)**2
+            tracking_cost = self.q_weight * tracking_error
             
-            # Control cost: (ΔU)^2 (penalize large changes in insulin)
-            # This encourages smooth control actions
-            control_cost_weight = max(self.r_weight, 1.0)  # Increased to 1.0 to prevent excessive changes
-            
-            # Additional penalty based on predicted BG and current insulin level
-            # This is a predictive CBF constraint
-            if bg_pred < self.bg_min:
-                # Strong penalty for increasing insulin when BG is predicted to be low
-                if delta_u[0] > 0:  # Only penalize increases, not decreases
-                    control_cost_weight *= 50.0  # Very strong penalty for increasing insulin when hypoglycemic
-            elif bg_pred > self.bg_max:
-                # Moderate penalty for decreasing insulin when hyperglycemic (but still penalize large changes)
-                if delta_u[0] < 0:  # Penalize decreases when hyperglycemic
-                    control_cost_weight *= 2.0
-            else:
-                # In normal range, penalize both increases and decreases equally
-                control_cost_weight *= 2.0  # Stronger penalty in normal range to maintain stability
-            
-            # Penalize ΔU^2 (change in insulin), not absolute insulin
-            # Also add asymmetric penalty: stronger for increases than decreases
+            # 2. Control effort cost: Penalize rate of change (ΔU)
+            # Asymmetric penalty: increases penalized more than decreases
             if delta_u[0] > 0:
-                # Penalize increases more strongly
-                control_cost = control_cost_weight * 2.0 * (delta_u[0]**2)
+                # Penalize increases more strongly (prevents over-insulinization)
+                control_cost = self.r_delta_weight * self.delta_u_asymmetry * (delta_u[0]**2)
             else:
                 # Penalize decreases less (allows reduction when needed)
-                control_cost = control_cost_weight * (delta_u[0]**2)
+                control_cost = self.r_delta_weight * (delta_u[0]**2)
             
-            # Glucose barrier function penalty J_G(t) at each step
-            # Implements Eq. (JG): J_G(t) = G(t) - G_max if G > G_max,
-            #                      J_G(t) = G(t) - G_min if G < G_min,
-            #                      J_G(t) = 0 otherwise
-            barrier_penalty_step = self._glucose_barrier_function(bg_pred)
+            # 3. Smooth barrier function penalty (continuous)
+            barrier_value = self._glucose_barrier_function(bg_pred)
+            barrier_cost = self.barrier_weight * (barrier_value**2)
             
-            # For hypoglycemia (G < G_min), barrier is negative, so we need to penalize it strongly
-            # For hyperglycemia (G > G_max), barrier is positive, penalize it
-            # Use squared penalty for stronger constraint enforcement
-            if barrier_penalty_step != 0:
-                barrier_cost = self.barrier_weight * (barrier_penalty_step**2)
-            else:
-                barrier_cost = 0.0
+            # 4. Zone-based penalty (continuous with smooth transitions)
+            zone_penalty = self._zone_penalty_function(bg_pred)
             
-            step_cost = self.q_weight * tracking_error + control_cost + barrier_cost
+            # 5. Predictive CBF penalty: Context-aware control cost
+            # Adjust control cost based on predicted BG zone
+            bg_zone_factor = 1.0
+            alpha = self.zone_transition_smoothness
+            
+            # Hypoglycemia zone: Strong penalty for increasing insulin
+            hypo_factor = 0.5 * (1 + np.tanh(alpha * (self.bg_min - bg_pred)))
+            if delta_u[0] > 0:  # Increasing insulin when hypoglycemic is dangerous
+                bg_zone_factor += hypo_factor * 10.0
+            
+            # Hyperglycemia zone: Moderate penalty for decreasing insulin
+            hyper_factor = 0.5 * (1 + np.tanh(alpha * (bg_pred - self.bg_max)))
+            if delta_u[0] < 0:  # Decreasing insulin when hyperglycemic
+                bg_zone_factor += hyper_factor * 2.0
+            
+            # Apply zone factor to control cost
+            control_cost *= bg_zone_factor
+            
+            # Total step cost
+            step_cost = tracking_cost + control_cost + barrier_cost + zone_penalty
             
             # Check for NaN in cost components
             if not np.isfinite(step_cost):
@@ -948,38 +996,67 @@ class NMPCController(Controller):
             
             dz0 = dz.copy()
         
-        # Penalty for constraint violation (insulin bounds) - CBF constraint
-        # Check absolute insulin (U_prev + ΔU) against bounds
+        # ========== CONSTRAINT PENALTIES (Continuous) ==========
+        
+        # 6. Insulin rate constraint violation (smooth penalty)
         u_absolute = u_prev + delta_u[0]
+        # Smooth penalty for exceeding bounds (using smooth approximation)
+        alpha_constraint = 10.0  # Sharp transition for constraints
         if u_absolute > self.insulin_max:
-            J += 100.0 * ((u_absolute - self.insulin_max)**2)  # Strong penalty for exceeding max
+            violation = u_absolute - self.insulin_max
+            # Smooth penalty: sigmoid-weighted quadratic
+            penalty_factor = 0.5 * (1 + np.tanh(alpha_constraint * violation))
+            J += self.insulin_rate_penalty_weight * penalty_factor * (violation**2)
         elif u_absolute < self.insulin_min:
-            J += 100.0 * ((self.insulin_min - u_absolute)**2)  # Strong penalty for going below min
+            violation = self.insulin_min - u_absolute
+            penalty_factor = 0.5 * (1 + np.tanh(alpha_constraint * violation))
+            J += self.insulin_rate_penalty_weight * penalty_factor * (violation**2)
         
-        # Also penalize large ΔU changes (rate of change constraint)
-        # Adaptive bounds based on predicted BG
-        bg_final = z[3, -1] * self._get_param('Vg', 1.0)
-        if bg_final > self.bg_max:
-            delta_u_max = 1.0  # Allow larger increases when hyperglycemic
-        elif bg_final < self.bg_min:
-            delta_u_max = 0.1  # Very small changes when hypoglycemic
-        else:
-            delta_u_max = 0.5  # Normal range
-            
-        if abs(delta_u[0]) > delta_u_max:
-            J += 100.0 * ((abs(delta_u[0]) - delta_u_max)**2)  # Strong penalty for excessive rate of change
-        
-        # Terminal cost: final state tracking
+        # 7. Rate of change constraint (smooth, adaptive)
         Vg = self._get_param('Vg', 1.0)
         bg_final = z[3, -1] * Vg
+        
+        # Adaptive ΔU bounds based on final predicted BG (smooth transitions)
+        alpha_adaptive = 5.0
+        # Hyperglycemia: allow larger increases
+        hyper_factor = 0.5 * (1 + np.tanh(alpha_adaptive * (bg_final - self.bg_max)))
+        delta_u_max_hyper = 1.0
+        
+        # Hypoglycemia: very small changes
+        hypo_factor = 0.5 * (1 + np.tanh(alpha_adaptive * (self.bg_min - bg_final)))
+        delta_u_max_hypo = 0.1
+        
+        # Normal range: moderate changes
+        normal_factor = 1.0 - hyper_factor - hypo_factor
+        delta_u_max_normal = 0.5
+        
+        # Weighted average of bounds (smooth transition)
+        delta_u_max = (hyper_factor * delta_u_max_hyper + 
+                      hypo_factor * delta_u_max_hypo + 
+                      normal_factor * delta_u_max_normal)
+        
+        # Smooth penalty for excessive rate of change
+        delta_u_violation = max(0, abs(delta_u[0]) - delta_u_max)
+        if delta_u_violation > 0:
+            penalty_factor = 0.5 * (1 + np.tanh(alpha_constraint * delta_u_violation))
+            J += self.insulin_rate_penalty_weight * penalty_factor * (delta_u_violation**2)
+        
+        # ========== TERMINAL COST (Continuous) ==========
+        
+        # 8. Terminal state tracking cost
         bg_target = xd[3] * Vg if len(xd) > 3 else self.target_bg
-        terminal_cost = 1.0 * (bg_final - bg_target)**2
+        terminal_tracking_error = (bg_final - bg_target)**2
+        terminal_cost = self.q_terminal_weight * terminal_tracking_error
         J += terminal_cost
         
-        # Terminal barrier function penalty (squared for stronger enforcement)
+        # 9. Terminal barrier function penalty (smooth)
         terminal_barrier = self._glucose_barrier_function(bg_final)
-        if terminal_barrier != 0:
-            J += self.barrier_weight * (terminal_barrier**2)
+        terminal_barrier_cost = self.barrier_weight * (terminal_barrier**2)
+        J += terminal_barrier_cost
+        
+        # 10. Terminal zone penalty (smooth)
+        terminal_zone_penalty = self._zone_penalty_function(bg_final)
+        J += terminal_zone_penalty
         
         # Final check for NaN in total cost
         if not np.isfinite(J):
@@ -1094,15 +1171,10 @@ class NMPCController(Controller):
     
     def _glucose_barrier_function(self, G):
         """
-        Glucose safe range barrier function J_G(t) as defined in Eq. (JG).
+        Smooth, continuous glucose barrier function.
         
-        Implements the control barrier function:
-        J_G(t) = G(t) - G_max  if G(t) > G_max
-                = G(t) - G_min  if G(t) < G_min
-                = 0             if G_min < G(t) < G_max
-        
-        This barrier function is used as a penalty term in the NMPC objective
-        function to ensure glucose stays within safe bounds [G_min, G_max].
+        Uses smooth approximations (sigmoid-based) for continuous differentiability.
+        This ensures the cost function is smooth for gradient-based optimization.
         
         Parameters
         ----------
@@ -1112,17 +1184,50 @@ class NMPCController(Controller):
         Returns
         -------
         J_G : float
-            Barrier function value
-            - Positive if G > G_max (penalty for hyperglycemia)
-            - Negative if G < G_min (penalty for hypoglycemia)
-            - Zero if G_min <= G <= G_max (no penalty)
+            Barrier function value (continuous and differentiable)
         """
-        if G > self.bg_max:
-            return G - self.bg_max
-        elif G < self.bg_min:
-            return G - self.bg_min
-        else:
-            return 0.0
+        # Smooth approximation using sigmoid functions for continuous transitions
+        # Hyperglycemia penalty: smooth transition above bg_max
+        alpha = self.zone_transition_smoothness
+        hyper_penalty = (G - self.bg_max) * (0.5 * (1 + np.tanh(alpha * (G - self.bg_max))))
+        
+        # Hypoglycemia penalty: smooth transition below bg_min
+        hypo_penalty = (G - self.bg_min) * (0.5 * (1 + np.tanh(alpha * (self.bg_min - G))))
+        
+        return hyper_penalty + hypo_penalty
+    
+    def _zone_penalty_function(self, G):
+        """
+        Zone-based penalty function with smooth transitions.
+        
+        Provides different penalty weights for different glucose zones:
+        - Hypoglycemia zone (G < bg_min): Strong penalty
+        - Normal zone (bg_min <= G <= bg_max): No penalty
+        - Hyperglycemia zone (G > bg_max): Moderate penalty
+        
+        Uses smooth sigmoid transitions for continuity.
+        
+        Parameters
+        ----------
+        G : float
+            Current glucose level (mg/dL)
+        
+        Returns
+        -------
+        penalty : float
+            Zone-based penalty value (continuous)
+        """
+        alpha = self.zone_transition_smoothness
+        
+        # Hypoglycemia zone: smooth transition
+        hypo_factor = 0.5 * (1 + np.tanh(alpha * (self.bg_min - G)))
+        hypo_penalty = self.hypo_penalty_weight * hypo_factor * max(0, (self.bg_min - G)**2)
+        
+        # Hyperglycemia zone: smooth transition
+        hyper_factor = 0.5 * (1 + np.tanh(alpha * (G - self.bg_max)))
+        hyper_penalty = self.hyper_penalty_weight * hyper_factor * max(0, (G - self.bg_max)**2)
+        
+        return hypo_penalty + hyper_penalty
     
     def _safety_barrier_function(self, x, other, bound):
         """
