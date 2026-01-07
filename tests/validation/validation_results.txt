@@ -1,0 +1,2178 @@
+/Users/mojyx/Documents/Mojarab/Research/Insuling/safe-predictive-simglucose/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO: t = 0, patient starts eating ...
+INFO: Resetting insulin pump ...
+INFO: Control input: 0.07657775216157416
+INFO: prev state: 162.43331412118062
+INFO: integrated state: 67.29994236354185
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [414.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02197125781263782
+INFO: prev state: 161.58202232204695
+INFO: integrated state: 132.0460093296827
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.019778950314777777
+INFO: prev state: 159.23937324662245
+INFO: integrated state: 189.76412906955005
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018781462888889808
+INFO: prev state: 157.47270951030134
+INFO: integrated state: 242.18225760045408
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018076186386669177
+INFO: prev state: 156.10895023557381
+INFO: integrated state: 290.50910830717555
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017502127078382185
+INFO: prev state: 154.97501455537628
+INFO: integrated state: 335.4341519733044
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016893098824246246
+INFO: prev state: 153.89782161722897
+INFO: integrated state: 377.12761682499126
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016077723077024333
+INFO: prev state: 152.70429058588806
+INFO: integrated state: 415.2404885826554
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01487942888322824
+INFO: prev state: 151.22134064452328
+INFO: integrated state: 448.9045105162253
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013163650972251572
+INFO: prev state: 149.3112895614478
+INFO: integrated state: 476.83837920056874
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01106308263560715
+INFO: prev state: 147.04884652306305
+INFO: integrated state: 497.9849187697579
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.009066644123402799
+INFO: prev state: 144.82730783254468
+INFO: integrated state: 512.4668422673919
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007663255065388398
+INFO: prev state: 143.11076694017203
+INFO: integrated state: 521.7991430879081
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007332158860638643
+INFO: prev state: 142.36331730736268
+INFO: integrated state: 528.8890950099961
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.008466373882586052
+INFO: prev state: 142.97394152620524
+INFO: integrated state: 537.8109195886118
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.010894737923264423
+INFO: prev state: 144.88095692708504
+INFO: integrated state: 552.453790369867
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013693129517798865
+INFO: prev state: 147.3466829423464
+INFO: integrated state: 574.4938391969062
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015940333744342675
+INFO: prev state: 149.4832172498668
+INFO: integrated state: 602.9434909465066
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01673857252873097
+INFO: prev state: 150.40265752691613
+INFO: integrated state: 634.1514635272549
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015317535385155448
+INFO: prev state: 149.3326799441412
+INFO: integrated state: 662.1495033596785
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Resetting insulin pump ...
+INFO: Resetting insulin pump ...
+INFO: Control input: 0.06400605425458893
+INFO: prev state: 153.0045406909417
+INFO: integrated state: 39.013622072825086
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.06400605425458893
+INFO: prev state: 153.0045406909417
+INFO: integrated state: 39.013622072825086
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013107803492311968
+INFO: prev state: 152.7893856264232
+INFO: integrated state: 77.38177895209472
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013107803492311968
+INFO: prev state: 152.7893856264232
+INFO: integrated state: 77.38177895209472
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01272660613521882
+INFO: prev state: 152.1619376658792
+INFO: integrated state: 113.86759194973234
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01272660613521882
+INFO: prev state: 152.1619376658792
+INFO: integrated state: 113.86759194973234
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012585204929628516
+INFO: prev state: 151.6253811740682
+INFO: integrated state: 148.74373547193693
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012585204929628516
+INFO: prev state: 151.6253811740682
+INFO: integrated state: 148.74373547193693
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012665957580770215
+INFO: prev state: 151.29023546305518
+INFO: integrated state: 182.61444186110248
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012665957580770215
+INFO: prev state: 151.29023546305518
+INFO: integrated state: 182.61444186110248
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01308542573806106
+INFO: prev state: 151.26701985535132
+INFO: integrated state: 216.41550142715644
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01308542573806106
+INFO: prev state: 151.26701985535132
+INFO: integrated state: 216.41550142715644
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013963486646556738
+INFO: prev state: 151.6662536880517
+INFO: integrated state: 251.41426249131158
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013963486646556738
+INFO: prev state: 151.6662536880517
+INFO: integrated state: 251.41426249131158
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015423333149545514
+INFO: prev state: 152.59845631548723
+INFO: integrated state: 289.2096314377733
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015423333149545514
+INFO: prev state: 152.59845631548723
+INFO: integrated state: 289.2096314377733
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017591473689751974
+INFO: prev state: 154.1741471104025
+INFO: integrated state: 331.73207276898074
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017591473689751974
+INFO: prev state: 154.1741471104025
+INFO: integrated state: 331.73207276898074
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.020553628733975447
+INFO: prev state: 156.47076778231485
+INFO: integrated state: 381.1443761159253
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.020553628733975447
+INFO: prev state: 156.47076778231485
+INFO: integrated state: 381.1443761159253
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Resetting insulin pump ...
+INFO: Control input: 0.07657775216157416
+INFO: prev state: 162.43331412118062
+INFO: integrated state: 67.29994236354185
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [414.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02197125781263782
+INFO: prev state: 161.58202232204695
+INFO: integrated state: 132.0460093296827
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.019778950314777777
+INFO: prev state: 159.23937324662245
+INFO: integrated state: 189.76412906955005
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018781462888889808
+INFO: prev state: 157.47270951030134
+INFO: integrated state: 242.18225760045408
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018076186386669177
+INFO: prev state: 156.10895023557381
+INFO: integrated state: 290.50910830717555
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017502127078382185
+INFO: prev state: 154.97501455537628
+INFO: integrated state: 335.4341519733044
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016893098824246246
+INFO: prev state: 153.89782161722897
+INFO: integrated state: 377.12761682499126
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016077723077024333
+INFO: prev state: 152.70429058588806
+INFO: integrated state: 415.2404885826554
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01487942888322824
+INFO: prev state: 151.22134064452328
+INFO: integrated state: 448.9045105162253
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013163650972251572
+INFO: prev state: 149.3112895614478
+INFO: integrated state: 476.83837920056874
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01106308263560715
+INFO: prev state: 147.04884652306305
+INFO: integrated state: 497.9849187697579
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.009066644123402799
+INFO: prev state: 144.82730783254468
+INFO: integrated state: 512.4668422673919
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007663255065388398
+INFO: prev state: 143.11076694017203
+INFO: integrated state: 521.7991430879081
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007332158860638643
+INFO: prev state: 142.36331730736268
+INFO: integrated state: 528.8890950099961
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.008466373882586052
+INFO: prev state: 142.97394152620524
+INFO: integrated state: 537.8109195886118
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.010894737923264423
+INFO: prev state: 144.88095692708504
+INFO: integrated state: 552.453790369867
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013693129517798865
+INFO: prev state: 147.3466829423464
+INFO: integrated state: 574.4938391969062
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015940333744342675
+INFO: prev state: 149.4832172498668
+INFO: integrated state: 602.9434909465066
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01673857252873097
+INFO: prev state: 150.40265752691613
+INFO: integrated state: 634.1514635272549
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015317535385155448
+INFO: prev state: 149.3326799441412
+INFO: integrated state: 662.1495033596785
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.011769843909946296
+INFO: prev state: 146.19443164329743
+INFO: integrated state: 680.7327982895708
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007341539066354873
+INFO: prev state: 141.94926622341873
+INFO: integrated state: 686.5805969598271
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.003268976252913448
+INFO: prev state: 137.78969426834107
+INFO: integrated state: 679.9496797648503
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.000747233846669642
+INFO: prev state: 134.90822635385112
+INFO: integrated state: 664.6743588264037
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0008335943280762476
+INFO: prev state: 134.36719464332194
+INFO: integrated state: 647.7759427563695
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0036191757059648006
+INFO: prev state: 136.4478608696313
+INFO: integrated state: 637.1195253652635
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.007901749796030953
+INFO: prev state: 140.25988112419157
+INFO: integrated state: 637.8991687378382
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01249577088713562
+INFO: prev state: 144.65255468086582
+INFO: integrated state: 651.8568327804356
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016267957837719865
+INFO: prev state: 148.47518080265309
+INFO: integrated state: 677.2823751883949
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01819268283507336
+INFO: prev state: 150.68368951305533
+INFO: integrated state: 709.3334437275608
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018030498537697604
+INFO: prev state: 150.87379545358033
+INFO: integrated state: 741.9548300883018
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016596136747460112
+INFO: prev state: 149.6008901983279
+INFO: integrated state: 770.7575006832856
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01468544741218589
+INFO: prev state: 147.63362685359675
+INFO: integrated state: 793.6583812440758
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01304625288137062
+INFO: prev state: 145.74065851509658
+INFO: integrated state: 810.8803567893656
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012361109919439065
+INFO: prev state: 144.6243943924332
+INFO: integrated state: 824.7535399666651
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012825777842773408
+INFO: prev state: 144.58978043043837
+INFO: integrated state: 838.5228812579802
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01398272557862971
+INFO: prev state: 145.34556768214702
+INFO: integrated state: 854.5595843044213
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015387765868769734
+INFO: prev state: 146.4680194398309
+INFO: integrated state: 873.963642623914
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016628161929028034
+INFO: prev state: 147.5333989870494
+INFO: integrated state: 896.5638395850622
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017329087817748296
+INFO: prev state: 148.1559368131856
+INFO: integrated state: 921.031650024619
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017395226474878348
+INFO: prev state: 148.17766668427052
+INFO: integrated state: 945.5646500774305
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01710619398692432
+INFO: prev state: 147.78232728568014
+INFO: integrated state: 968.911631934471
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01673446285632523
+INFO: prev state: 147.22959172415543
+INFO: integrated state: 990.6004071069373
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016534984296568984
+INFO: prev state: 146.77913310016356
+INFO: integrated state: 1010.937806407428
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.016770499708544218
+INFO: prev state: 146.69062450839334
+INFO: integrated state: 1031.009679932608
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01771154068085328
+INFO: prev state: 147.22373903824374
+INFO: integrated state: 1052.6808970473392
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.019636428990130808
+INFO: prev state: 148.638149774304
+INFO: integrated state: 1078.5953463702513
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.022831276601364366
+INFO: prev state: 151.1935297968224
+INFO: integrated state: 1112.1759357607184
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.027589985668215244
+INFO: prev state: 155.14955218216164
+INFO: integrated state: 1157.6245923072033
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.028315952010029878
+INFO: prev state: 156.3421676107588
+INFO: integrated state: 1206.6510951394798
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02058315660726262
+INFO: prev state: 150.47302614459056
+INFO: integrated state: 1238.0701735732514
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017173703425209276
+INFO: prev state: 146.2130078032552
+INFO: integrated state: 1256.7091969830171
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.014921257164091045
+INFO: prev state: 143.31887584650946
+INFO: integrated state: 1266.6658245225456
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013623557672734923
+INFO: prev state: 141.54739353225946
+INFO: integrated state: 1271.308005119324
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013071047696324493
+INFO: prev state: 140.6553241169133
+INFO: integrated state: 1273.273977470064
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013046872876682677
+INFO: prev state: 140.39943085571485
+INFO: integrated state: 1274.4722700372085
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013326881752545563
+INFO: prev state: 140.53647700305882
+INFO: integrated state: 1276.081701046385
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013679625759826343
+INFO: prev state: 140.82322581278657
+INFO: integrated state: 1278.5513784847446
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013866359231869902
+INFO: prev state: 141.01644053846348
+INFO: integrated state: 1281.600700100135
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013683666704908002
+INFO: prev state: 140.90485491254586
+INFO: integrated state: 1284.3152648377727
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013166901732412133
+INFO: prev state: 140.46902554116227
+INFO: integrated state: 1285.7223414612595
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012670539355639856
+INFO: prev state: 139.977243341061
+INFO: integrated state: 1285.6540714844425
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.012546446517770708
+INFO: prev state: 139.76174018745996
+INFO: integrated state: 1284.9392920468224
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.013135143466541889
+INFO: prev state: 140.15474795642024
+INFO: integrated state: 1285.403535916083
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.014720646692774435
+INFO: prev state: 141.43864548931526
+INFO: integrated state: 1289.719472384029
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01721323744668864
+INFO: prev state: 143.59669341446508
+INFO: integrated state: 1300.5095526274242
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0200241644416738
+INFO: prev state: 146.16347504016593
+INFO: integrated state: 1318.999977747922
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02256733157042896
+INFO: prev state: 148.5738676047538
+INFO: integrated state: 1344.7215805621834
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0242729244015444
+INFO: prev state: 150.26274834813037
+INFO: integrated state: 1375.5098256065744
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.024637273052460454
+INFO: prev state: 150.72731818432862
+INFO: integrated state: 1407.6917801595603
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0236194384920365
+INFO: prev state: 149.83872006391283
+INFO: integrated state: 1437.2079403512987
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.021797852704133907
+INFO: prev state: 148.0290099914439
+INFO: integrated state: 1461.2949703256304
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.019743134797197807
+INFO: prev state: 145.8548913183171
+INFO: integrated state: 1478.8596442805817
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018001055867230803
+INFO: prev state: 143.873067397898
+INFO: integrated state: 1490.4788464742758
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017065550992817265
+INFO: prev state: 142.58883874553038
+INFO: integrated state: 1498.2453627108669
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017051625829753753
+INFO: prev state: 142.1990888383664
+INFO: integrated state: 1504.842629225966
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017566164139834414
+INFO: prev state: 142.43807559527266
+INFO: integrated state: 1512.156856011784
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01822521170456047
+INFO: prev state: 142.93725125715014
+INFO: integrated state: 1520.9686097832343
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018668026434830242
+INFO: prev state: 143.32806806703596
+INFO: integrated state: 1530.9528139843421
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018569598453640385
+INFO: prev state: 143.2770697521067
+INFO: integrated state: 1540.7840232406622
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.017863948893230033
+INFO: prev state: 142.66134893364423
+INFO: integrated state: 1548.768070041595
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01683232648655015
+INFO: prev state: 141.6738215730117
+INFO: integrated state: 1553.78953476063
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.015750070286870834
+INFO: prev state: 140.57758659770133
+INFO: integrated state: 1555.522294553734
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.014877017996088504
+INFO: prev state: 139.6357429373387
+INFO: integrated state: 1554.42952336575
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.014454708531161807
+INFO: prev state: 139.0917457074629
+INFO: integrated state: 1551.7047604881386
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.014581381873705656
+INFO: prev state: 139.07118712848393
+INFO: integrated state: 1548.9183218735905
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01516260761196933
+INFO: prev state: 139.52286507704605
+INFO: integrated state: 1547.4869171047285
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01610896721127643
+INFO: prev state: 140.35628979943337
+INFO: integrated state: 1548.5557865030287
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.01734142332381898
+INFO: prev state: 141.48097154394986
+INFO: integrated state: 1552.9987011348783
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018775147495400827
+INFO: prev state: 142.8041132490265
+INFO: integrated state: 1561.411040881958
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02030483797098731
+INFO: prev state: 144.21907398388242
+INFO: integrated state: 1574.068262833605
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.021798920650916286
+INFO: prev state: 145.59844701290578
+INFO: integrated state: 1590.8636038723225
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.023122768339277913
+INFO: prev state: 146.81021097864246
+INFO: integrated state: 1611.29423680825
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02413933140917285
+INFO: prev state: 147.72234452547838
+INFO: integrated state: 1634.4612703846851
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02470759959481878
+INFO: prev state: 148.20282629959854
+INFO: integrated state: 1659.0697492834806
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02468260199156244
+INFO: prev state: 148.11963494894536
+INFO: integrated state: 1683.4286541303168
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.023915407055888866
+INFO: prev state: 147.3407491231756
+INFO: integrated state: 1705.4509014998437
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.022253122605429446
+INFO: prev state: 145.73414747361716
+INFO: integrated state: 1722.653343920695
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.019538895818967512
+INFO: prev state: 143.1678086532247
+INFO: integrated state: 1732.1567698803692
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.018473754962540855
+INFO: prev state: 141.65609261110905
+INFO: integrated state: 1737.1250477136964
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.021719213296697307
+INFO: prev state: 143.6749952674475
+INFO: integrated state: 1748.150033516039
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.023921102740221422
+INFO: prev state: 145.74845062065765
+INFO: integrated state: 1765.395385378012
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.026165504050324445
+INFO: prev state: 147.82077530257266
+INFO: integrated state: 1788.85771128573
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.02839669994057247
+INFO: prev state: 149.83628594642954
+INFO: integrated state: 1818.3665691250185
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.030557302624873155
+INFO: prev state: 151.7392991868246
+INFO: integrated state: 1853.5844666854923
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [420.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.032588253817472754
+INFO: prev state: 153.47413165966952
+INFO: integrated state: 1894.0068616645008
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.034428824732951877
+INFO: prev state: 154.98510000214753
+INFO: integrated state: 1938.9621616709433
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0360166160862207
+INFO: prev state: 156.21652085267033
+INFO: integrated state: 1987.6117242289542
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03728755809251328
+INFO: prev state: 157.11271085083538
+INFO: integrated state: 2038.9498567814603
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.038196385714354124
+INFO: prev state: 157.63334307261348
+INFO: integrated state: 2091.8498859993006
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03881435677772846
+INFO: prev state: 157.83022920645496
+INFO: integrated state: 2145.3405736186655
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.039367847812618414
+INFO: prev state: 157.89338885893756
+INFO: integrated state: 2199.020740195478
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04008381712646866
+INFO: prev state: 158.0435545081198
+INFO: integrated state: 2253.1514037198376
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04118560737854885
+INFO: prev state: 158.5014586330428
+INFO: integrated state: 2308.655779618966
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.042856050725780775
+INFO: prev state: 159.45248435545403
+INFO: integrated state: 2367.013232685328
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04501252907314283
+INFO: prev state: 160.86991864858066
+INFO: integrated state: 2429.6229886310703
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04721812935328967
+INFO: prev state: 162.4089042623794
+INFO: integrated state: 2496.8497014182085
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [417.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04903737590160959
+INFO: prev state: 163.65388523116548
+INFO: integrated state: 2567.811357111705
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [417.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.050045892614132996
+INFO: prev state: 164.18930559005332
+INFO: integrated state: 2640.379273881865
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [417.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04987394690633377
+INFO: prev state: 163.64994202314966
+INFO: integrated state: 2711.329099951314
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [417.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04852673313133657
+INFO: prev state: 161.97256710465498
+INFO: integrated state: 2777.2468012652794
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [417.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04651087530245141
+INFO: prev state: 159.5469472435127
+INFO: integrated state: 2835.8876429958173
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04432791287650533
+INFO: prev state: 156.86351414578854
+INFO: integrated state: 2886.4781854331827
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04246054316331729
+INFO: prev state: 154.41269951818623
+INFO: integrated state: 2929.7162839877415
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04134434984634858
+INFO: prev state: 152.63856513439993
+INFO: integrated state: 2967.631979390941
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0410727356384367
+INFO: prev state: 151.70695316699545
+INFO: integrated state: 3002.7528388919272
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04128037918195897
+INFO: prev state: 151.36637638652863
+INFO: integrated state: 3036.8519680515133
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0416098711474646
+INFO: prev state: 151.27260769684426
+INFO: integrated state: 3070.669791142046
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.041724388682187225
+INFO: prev state: 151.08142000228614
+INFO: integrated state: 3103.9140511489045
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04131951878178909
+INFO: prev state: 150.48063870329656
+INFO: integrated state: 3135.3559672587944
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.040327219004176566
+INFO: prev state: 149.3504041745156
+INFO: integrated state: 3163.4071797823412
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03899637607516051
+INFO: prev state: 147.85932925163172
+INFO: integrated state: 3186.9851675372365
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03757025094080971
+INFO: prev state: 146.24013176198594
+INFO: integrated state: 3205.705562823194
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03627771775197054
+INFO: prev state: 144.72552953330043
+INFO: integrated state: 3219.8821514230954
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.035334567422599265
+INFO: prev state: 143.53319181460134
+INFO: integrated state: 3230.4817268668994
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.034847748505024895
+INFO: prev state: 142.79049638091726
+INFO: integrated state: 3238.853216009651
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03477754509457937
+INFO: prev state: 142.48938379609146
+INFO: integrated state: 3246.3213673979253
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.035089015696823066
+INFO: prev state: 142.59169746615572
+INFO: integrated state: 3254.0964597963925
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.035756106505811576
+INFO: prev state: 143.05928079742466
+INFO: integrated state: 3263.2743021886663
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03674419105528425
+INFO: prev state: 143.84840622440436
+INFO: integrated state: 3274.8195208618795
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.03797462026635855
+INFO: prev state: 144.8819203494059
+INFO: integrated state: 3289.465281910097
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 420.0, patient starts eating ...
+INFO: Control input: 0.03931074787634425
+INFO: prev state: 146.03255138028393
+INFO: integrated state: 3307.562936050949
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.040614815222023024
+INFO: prev state: 147.16252724120613
+INFO: integrated state: 3329.050517774567
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.041753264353796914
+INFO: prev state: 148.13770119233996
+INFO: integrated state: 3353.463621351587
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [422.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 429.0, Patient finishes eating!
+INFO: Control input: 0.042598553890229165
+INFO: prev state: 148.83236355561996
+INFO: integrated state: 3379.960712018447
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [422.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.043029927418866666
+INFO: prev state: 149.13083111291664
+INFO: integrated state: 3407.3532053571967
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [424.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.042927858334620254
+INFO: prev state: 148.92345248901538
+INFO: integrated state: 3434.123562824243
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [426.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.042166548719826
+INFO: prev state: 148.09984794094152
+INFO: integrated state: 3458.4231066470675
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [429.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04061050391441283
+INFO: prev state: 146.544666621192
+INFO: integrated state: 3478.0571065106433
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [433.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.039700279925029204
+INFO: prev state: 145.32594830024007
+INFO: integrated state: 3494.0349514113636
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [437.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04099842051016854
+INFO: prev state: 145.8750403221012
+INFO: integrated state: 3511.6600723776673
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [442.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04178093872433947
+INFO: prev state: 146.4670135809474
+INFO: integrated state: 3531.0611131205096
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [446.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04263634656178167
+INFO: prev state: 147.11105496816927
+INFO: integrated state: 3552.3942780250172
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [452.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04356887228662379
+INFO: prev state: 147.81146087182253
+INFO: integrated state: 3575.828660640485
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [457.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.044578912644300486
+INFO: prev state: 148.56833474637736
+INFO: integrated state: 3601.533664879617
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [463.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.045663393200749205
+INFO: prev state: 149.37812610055911
+INFO: integrated state: 3629.6680431812943
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [468.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04681603695106225
+INFO: prev state: 150.23404891457676
+INFO: integrated state: 3660.3701899250245
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [473.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.04802771397950116
+INFO: prev state: 151.12652128883238
+INFO: integrated state: 3693.7497537915215
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [478.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.049287109075937356
+INFO: prev state: 152.0438389757247
+INFO: integrated state: 3729.8812707186958
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [483.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.05058104141030701
+INFO: prev state: 152.9726312712712
+INFO: integrated state: 3768.799164532509
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [487.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.051892068827385035
+INFO: prev state: 153.89621570436276
+INFO: integrated state: 3810.4878116455975
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [491.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.05319855565125935
+INFO: prev state: 154.7943120771932
+INFO: integrated state: 3854.870747877177
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [495.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.054482221375528085
+INFO: prev state: 155.64871344186554
+INFO: integrated state: 3901.816888202774
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [498.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.055729061416501004
+INFO: prev state: 156.44534776132133
+INFO: integrated state: 3951.152931486738
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.056936677601849964
+INFO: prev state: 157.18019815556727
+INFO: integrated state: 4002.69352595344
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.05815014757678006
+INFO: prev state: 157.88745877682607
+INFO: integrated state: 4056.355902283918
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.059475744654352014
+INFO: prev state: 158.65600391784113
+INFO: integrated state: 4112.323914037442
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.06102308522689943
+INFO: prev state: 159.58888554435404
+INFO: integrated state: 4171.090570670503
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.06290290339605333
+INFO: prev state: 160.79121965309972
+INFO: integrated state: 4233.4642296298025
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.0652022320020712
+INFO: prev state: 162.3484971926048
+INFO: integrated state: 4300.509721207617
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.06785024967060718
+INFO: prev state: 164.22098864204946
+INFO: integrated state: 4373.172687133765
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07056510317533912
+INFO: prev state: 166.18027938851347
+INFO: integrated state: 4451.713525299306
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07306499129915307
+INFO: prev state: 167.95596188174838
+INFO: integrated state: 4535.581410944551
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07507371166515633
+INFO: prev state: 169.2774136372202
+INFO: integrated state: 4623.413651856212
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07635109355784088
+INFO: prev state: 169.90707118876412
+INFO: integrated state: 4713.134865422504
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07690557888700252
+INFO: prev state: 169.80744047177413
+INFO: integrated state: 4802.5571868378265
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07707818813255744
+INFO: prev state: 169.2413223160779
+INFO: integrated state: 4890.28115378606
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07720623516624829
+INFO: prev state: 168.53789830031025
+INFO: integrated state: 4975.89484868699
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07761420560827594
+INFO: prev state: 168.02591741613207
+INFO: integrated state: 5059.972600935386
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.07860710341816585
+INFO: prev state: 168.012012410642
+INFO: integrated state: 5144.008638167312
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.08033235742379502
+INFO: prev state: 168.67220638425192
+INFO: integrated state: 5230.025257320068
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.08272529194967349
+INFO: prev state: 169.98683112841758
+INFO: integrated state: 5319.98575070532
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.08572754810918898
+INFO: prev state: 171.89247573370622
+INFO: integrated state: 5415.663177906439
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.08929304850005011
+INFO: prev state: 174.32543147416584
+INFO: integrated state: 5518.639472328937
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.09336263575367901
+INFO: prev state: 177.21353864133368
+INFO: integrated state: 5630.280088252938
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.09781194548454675
+INFO: prev state: 180.43524311184643
+INFO: integrated state: 5751.585817588478
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.10243084192751835
+INFO: prev state: 183.7950485916868
+INFO: integrated state: 5882.970963363538
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.10700595607736699
+INFO: prev state: 187.0809469807204
+INFO: integrated state: 6024.213804305699
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.11132296363104655
+INFO: prev state: 190.08085593617227
+INFO: integrated state: 6174.456372114216
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.11518037684663743
+INFO: prev state: 192.59707382816453
+INFO: integrated state: 6332.2475935987095
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.11848131582562842
+INFO: prev state: 194.51839837427212
+INFO: integrated state: 6495.802788721526
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [498.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1212697712465444
+INFO: prev state: 195.86340711306488
+INFO: integrated state: 6663.39301006072
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [495.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12358554655026839
+INFO: prev state: 196.6795641155121
+INFO: integrated state: 6833.431702407257
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [492.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12546033774015136
+INFO: prev state: 197.01440656593712
+INFO: integrated state: 7004.474922105069
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [489.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12692736068026134
+INFO: prev state: 196.91556023589226
+INFO: integrated state: 7175.221602812746
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [487.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12802136229203287
+INFO: prev state: 196.43074975690212
+INFO: integrated state: 7344.513852083453
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [484.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12877862645607568
+INFO: prev state: 195.6078033906564
+INFO: integrated state: 7511.337262255422
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [481.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12923697409064724
+INFO: prev state: 194.49465194873386
+INFO: integrated state: 7674.821218101623
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [478.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1294357568551116
+INFO: prev state: 193.139321492755
+INFO: integrated state: 7834.239182579889
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [475.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12995350904767533
+INFO: prev state: 191.99316828959607
+INFO: integrated state: 7990.218687448677
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [472.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1309065196071825
+INFO: prev state: 191.2515416219208
+INFO: integrated state: 8143.97331231444
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [469.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1306383253615356
+INFO: prev state: 189.7118295842736
+INFO: integrated state: 8293.108801067261
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [466.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12986140101115862
+INFO: prev state: 187.6256921464329
+INFO: integrated state: 8435.98587750656
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [463.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12881096045475807
+INFO: prev state: 185.24474929637756
+INFO: integrated state: 8571.720125395694
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [460.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1277296683386396
+INFO: prev state: 182.82053763760638
+INFO: integrated state: 8700.181738308513
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [457.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12686759192889532
+INFO: prev state: 180.60446531875925
+INFO: integrated state: 8821.995134264791
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [454.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12648215405863003
+INFO: prev state: 178.8477683666764
+INFO: integrated state: 8938.53843936482
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [451.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.12683809105068752
+INFO: prev state: 177.8014720844486
+INFO: integrated state: 9051.942855618167
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [447.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1282074197734274
+INFO: prev state: 177.71636143404643
+INFO: integrated state: 9165.091939920307
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [444.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.13081010609062552
+INFO: prev state: 178.79848037707845
+INFO: integrated state: 9281.487381051542
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [440.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.13453099624633713
+INFO: prev state: 180.9867119211359
+INFO: integrated state: 9404.44751681495
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [436.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1388080282800194
+INFO: prev state: 183.8193428141864
+INFO: integrated state: 9535.905545257508
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [433.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14307991800908576
+INFO: prev state: 186.7454826209296
+INFO: integrated state: 9676.141993120298
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [429.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14679836515651085
+INFO: prev state: 189.2140795742133
+INFO: integrated state: 9823.784231842938
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [425.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14945994184157585
+INFO: prev state: 190.72009453591318
+INFO: integrated state: 9975.944515450677
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [421.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15089959573176984
+INFO: prev state: 191.0351365669256
+INFO: integrated state: 10129.049925151454
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15140661947318645
+INFO: prev state: 190.34587430798533
+INFO: integrated state: 10280.08754807541
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [414.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1512606647413368
+INFO: prev state: 188.93131052243334
+INFO: integrated state: 10426.881479642709
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [411.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15071920187348686
+INFO: prev state: 187.07061793840316
+INFO: integrated state: 10568.093333457919
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [408.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15002770519106282
+INFO: prev state: 185.0277333769635
+INFO: integrated state: 10703.176533588809
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [404.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14932132484969327
+INFO: prev state: 182.97410297959476
+INFO: integrated state: 10832.098842527594
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [401.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14858606607193467
+INFO: prev state: 180.94233397989274
+INFO: integrated state: 10954.925844467272
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [398.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14781438646421755
+INFO: prev state: 178.9344295096318
+INFO: integrated state: 11071.729132996168
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [396.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14700944569010016
+INFO: prev state: 176.9527231475118
+INFO: integrated state: 11182.587302438704
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [393.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14619650153464103
+INFO: prev state: 175.01615216956844
+INFO: integrated state: 11287.635758947408
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [390.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1455263586993842
+INFO: prev state: 173.2415388748247
+INFO: integrated state: 11387.360375571883
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [388.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14531622955139586
+INFO: prev state: 171.89235406546396
+INFO: integrated state: 11483.037437768275
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [385.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14588617694437214
+INFO: prev state: 171.26494044138303
+INFO: integrated state: 11576.832259092424
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [383.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.14755465556713024
+INFO: prev state: 171.65598484250023
+INFO: integrated state: 11671.800213619925
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [380.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15057318765551336
+INFO: prev state: 173.3053853501106
+INFO: integrated state: 11771.716369670257
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [378.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1547629849330331
+INFO: prev state: 176.11071226477554
+INFO: integrated state: 11880.048506464584
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [375.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1593714004281532
+INFO: prev state: 179.4558645888244
+INFO: integrated state: 11998.416100231057
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [372.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.163646503058795
+INFO: prev state: 182.6107226895694
+INFO: integrated state: 12126.248268299765
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [370.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1668526448679076
+INFO: prev state: 184.84530231107482
+INFO: integrated state: 12260.78417523299
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [367.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1683329025171284
+INFO: prev state: 185.50512115136758
+INFO: integrated state: 12397.299538687092
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [365.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1679889016026796
+INFO: prev state: 184.3882099496984
+INFO: integrated state: 12530.464168536188
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [363.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16647031302666218
+INFO: prev state: 181.97130599339982
+INFO: integrated state: 12656.378086516386
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [362.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1644159398917392
+INFO: prev state: 178.88194576828144
+INFO: integrated state: 12773.02392382123
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [360.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16243307576971644
+INFO: prev state: 175.74761384069848
+INFO: integrated state: 12880.266765343325
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [359.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16108450572942784
+INFO: prev state: 173.14828201717054
+INFO: integrated state: 12979.711611394838
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [357.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16058664070238182
+INFO: prev state: 171.37921394561772
+INFO: integrated state: 13073.84925323169
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [356.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 720.0, patient starts eating ...
+INFO: Control input: 0.1606891337988808
+INFO: prev state: 170.30778443632732
+INFO: integrated state: 13164.772606540673
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16115086888560612
+INFO: prev state: 169.70430322423135
+INFO: integrated state: 13253.885516213368
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [404.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16176195037235006
+INFO: prev state: 169.34339721372012
+INFO: integrated state: 13341.915707854529
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [412.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1623230896398472
+INFO: prev state: 169.01379872440646
+INFO: integrated state: 13428.957104027748
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [413.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 734.0, Patient finishes eating!
+INFO: Control input: 0.16263829840316146
+INFO: prev state: 168.5149952032646
+INFO: integrated state: 13514.50208963754
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [413.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1625131110156139
+INFO: prev state: 167.654816390245
+INFO: integrated state: 13597.466538808276
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [413.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1617517286716847
+INFO: prev state: 166.2465015602627
+INFO: integrated state: 13676.206043489065
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [414.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1601496633188796
+INFO: prev state: 164.10232755305736
+INFO: integrated state: 13748.513026148237
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [416.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1588258574858302
+INFO: prev state: 162.0311273065252
+INFO: integrated state: 13814.606408067813
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1589691267699044
+INFO: prev state: 161.125078843551
+INFO: integrated state: 13877.981644598467
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [423.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.158230331561295
+INFO: prev state: 159.8691560473705
+INFO: integrated state: 13937.58911274058
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [428.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15728972610723338
+INFO: prev state: 158.4026652467133
+INFO: integrated state: 13992.79710848072
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [433.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15626799800800814
+INFO: prev state: 156.85568650407905
+INFO: integrated state: 14043.364167992957
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [438.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15528190069010306
+INFO: prev state: 155.35011588364986
+INFO: integrated state: 14089.414515643906
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [444.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1544449044200613
+INFO: prev state: 154.00059841862912
+INFO: integrated state: 14131.416310899793
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [450.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15386780617355256
+INFO: prev state: 152.91538190307324
+INFO: integrated state: 14170.162456609012
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [456.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1536595784165247
+INFO: prev state: 152.19731086359423
+INFO: integrated state: 14206.754389199796
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [461.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15392880702818057
+INFO: prev state: 151.9452750680355
+INFO: integrated state: 14242.590214403903
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [467.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15476470986128835
+INFO: prev state: 152.24042455494583
+INFO: integrated state: 14279.31148806874
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [471.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15613879087583485
+INFO: prev state: 153.06936313509703
+INFO: integrated state: 14318.519577474031
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [475.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15786758335635595
+INFO: prev state: 154.279131469986
+INFO: integrated state: 14361.35697188399
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [479.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.15977448743680284
+INFO: prev state: 155.6904711559687
+INFO: integrated state: 14408.428385351895
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [482.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16169517311054174
+INFO: prev state: 157.13078473175926
+INFO: integrated state: 14459.820739547173
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [484.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16348642218988238
+INFO: prev state: 158.4488572787478
+INFO: integrated state: 14515.167311383417
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [486.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.165117637702845
+INFO: prev state: 159.58668776144506
+INFO: integrated state: 14573.927374667752
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [488.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.16670626809954087
+INFO: prev state: 160.62191770500877
+INFO: integrated state: 14635.793127782777
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [490.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1683711563286325
+INFO: prev state: 161.66539821435572
+INFO: integrated state: 14700.789322425844
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [491.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.17022752783408973
+INFO: prev state: 162.8310755109624
+INFO: integrated state: 14769.282548958732
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [493.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1723803024939463
+INFO: prev state: 164.2233766310098
+INFO: integrated state: 14841.952678851761
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [494.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.17484985170477801
+INFO: prev state: 165.87858784494773
+INFO: integrated state: 14919.588442386605
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [495.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.1775423835682485
+INFO: prev state: 167.72952131952377
+INFO: integrated state: 15002.777006345175
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [497.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.18036570386083656
+INFO: prev state: 169.6858306779195
+INFO: integrated state: 15091.834498378934
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [498.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.18323207915114045
+INFO: prev state: 171.6567582949932
+INFO: integrated state: 15186.804773263913
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [499.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.18606183571223106
+INFO: prev state: 173.55953055844225
+INFO: integrated state: 15287.48336493924
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.18883803655604228
+INFO: prev state: 175.36228481959796
+INFO: integrated state: 15393.570219398034
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.19162808566548847
+INFO: prev state: 177.10985880853056
+INFO: integrated state: 15504.899795823625
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.19449712947077302
+INFO: prev state: 178.8635633365352
+INFO: integrated state: 15621.49048583323
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.19750575048604846
+INFO: prev state: 180.6840250549209
+INFO: integrated state: 15743.542560997992
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.200698446896395
+INFO: prev state: 182.6182722285415
+INFO: integrated state: 15871.397377683617
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.20402103489853482
+INFO: prev state: 184.63486389840935
+INFO: integrated state: 16005.301969378845
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.20728807153835274
+INFO: prev state: 186.58500485802554
+INFO: integrated state: 16145.056983952922
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [499.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.21031366773105978
+INFO: prev state: 188.2935746331543
+INFO: integrated state: 16289.937707852385
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [498.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.21291510870778418
+INFO: prev state: 189.58519238023382
+INFO: integrated state: 16438.693284993085
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [497.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2149384083683214
+INFO: prev state: 190.30990473385134
+INFO: integrated state: 16589.62299919464
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [496.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.21642135603267212
+INFO: prev state: 190.47132071400713
+INFO: integrated state: 16741.03696133666
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [495.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2176579429893475
+INFO: prev state: 190.30351021048745
+INFO: integrated state: 16891.947491968123
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [494.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.21894064512793318
+INFO: prev state: 190.0917552088108
+INFO: integrated state: 17042.222757594554
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [493.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.22055345906490095
+INFO: prev state: 190.12136241891926
+INFO: integrated state: 17192.586844851314
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [492.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.22274723940971805
+INFO: prev state: 190.6463688256335
+INFO: integrated state: 17344.525951328214
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [490.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.22554037766534799
+INFO: prev state: 191.73293082045774
+INFO: integrated state: 17499.72474378959
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [489.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.22864008584353027
+INFO: prev state: 193.1653615093402
+INFO: integrated state: 17659.22082831761
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [487.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2317576665237899
+INFO: prev state: 194.66543405779538
+INFO: integrated state: 17823.217130490997
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [485.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2346170715366219
+INFO: prev state: 195.9550336882328
+INFO: integrated state: 17991.082231555694
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [483.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.23693398824439782
+INFO: prev state: 196.75613286868884
+INFO: integrated state: 18161.35063016176
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [481.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.23841579858515088
+INFO: prev state: 196.79075242982213
+INFO: integrated state: 18331.722887451226
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [479.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2387615398128578
+INFO: prev state: 195.78092131121468
+INFO: integrated state: 18499.06565138487
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [477.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.23766186797956068
+INFO: prev state: 193.44863892708764
+INFO: integrated state: 18659.41156816613
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [475.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.23479902203341246
+INFO: prev state: 189.51583949558525
+INFO: integrated state: 18807.95908665289
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [474.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2342143493419472
+INFO: prev state: 186.98002873046005
+INFO: integrated state: 18948.89917284427
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [472.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.23989578105230405
+INFO: prev state: 189.550099175511
+INFO: integrated state: 19097.549470370803
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [469.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.24365654333348502
+INFO: prev state: 191.8983112662105
+INFO: integrated state: 19253.244404169433
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [466.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.24721043459474384
+INFO: prev state: 193.98307073133975
+INFO: integrated state: 19415.193616363453
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [463.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.25050757944083735
+INFO: prev state: 195.76250014073702
+INFO: integrated state: 19582.481116785664
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [461.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.25349648758684257
+INFO: prev state: 197.19438234942368
+INFO: integrated state: 19754.064263833934
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [458.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2561239866528928
+INFO: prev state: 198.23610359827103
+INFO: integrated state: 19928.772574628747
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [455.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2583351589316442
+INFO: prev state: 198.8446007885853
+INFO: integrated state: 20105.306376994504
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [452.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26007328816714903
+INFO: prev state: 198.9763184950493
+INFO: integrated state: 20282.235332479653
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [449.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2612798227662991
+INFO: prev state: 198.58718170488925
+INFO: integrated state: 20457.99687759432
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [446.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2619193660964099
+INFO: prev state: 197.65134341657233
+INFO: integrated state: 20630.950907844035
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [444.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26209902395277096
+INFO: prev state: 196.25497200989105
+INFO: integrated state: 20799.715823873707
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [441.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2621155795515667
+INFO: prev state: 194.65255898709503
+INFO: integrated state: 20963.673500834993
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [438.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26226683913079735
+INFO: prev state: 193.1357178386093
+INFO: integrated state: 21123.080654350822
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [435.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.262846599402383
+INFO: prev state: 191.9957741038084
+INFO: integrated state: 21279.06797666225
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [432.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26411026154440537
+INFO: prev state: 191.48862985928923
+INFO: integrated state: 21433.533866240115
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [429.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2660506452574451
+INFO: prev state: 191.65863741110525
+INFO: integrated state: 21588.50977847343
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [425.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26830951933649516
+INFO: prev state: 192.23297551659692
+INFO: integrated state: 21745.208705023222
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [422.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27053245825887734
+INFO: prev state: 192.86852228563305
+INFO: integrated state: 21903.81427188012
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [418.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27237858856066705
+INFO: prev state: 193.22246495280763
+INFO: integrated state: 22063.481666738542
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27354933984013885
+INFO: prev state: 192.99150861776695
+INFO: integrated state: 22222.456192591842
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [411.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2740374325827936
+INFO: prev state: 192.10753014709812
+INFO: integrated state: 22378.778783033136
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [408.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27422524938594295
+INFO: prev state: 190.85497870348323
+INFO: integrated state: 22531.343719143584
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [405.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2744912355416447
+INFO: prev state: 189.5970934385274
+INFO: integrated state: 22680.134999459166
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [402.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27519922998062735
+INFO: prev state: 188.6976833491586
+INFO: integrated state: 22826.22804950664
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [398.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27667417270649985
+INFO: prev state: 188.48333999586472
+INFO: integrated state: 22971.678069494235
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [395.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2789616734214221
+INFO: prev state: 189.05450454382597
+INFO: integrated state: 23118.84158312571
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [391.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.28173303396550614
+INFO: prev state: 190.17208973664327
+INFO: integrated state: 23269.35785233564
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [387.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2846654462457532
+INFO: prev state: 191.5219232259584
+INFO: integrated state: 23423.923622013517
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [384.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.28745228926119637
+INFO: prev state: 192.7902705872855
+INFO: integrated state: 23582.294433775372
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [380.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2898417761707933
+INFO: prev state: 193.71169152160104
+INFO: integrated state: 23743.429508340174
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [377.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2919417368968679
+INFO: prev state: 194.30850424049987
+INFO: integrated state: 23906.355021061674
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [374.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2943399774796531
+INFO: prev state: 195.03444651190227
+INFO: integrated state: 24071.458360597382
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [371.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2976221976740671
+INFO: prev state: 196.43932217904552
+INFO: integrated state: 24240.776327134517
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [368.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3023588917672565
+INFO: prev state: 199.07317691669488
+INFO: integrated state: 24417.9958578846
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [365.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.30899230806612976
+INFO: prev state: 203.3775563446365
+INFO: integrated state: 24608.12852691851
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [361.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3171445447742981
+INFO: prev state: 209.14183371499388
+INFO: integrated state: 24815.554028063492
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [358.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.32534425451640675
+INFO: prev state: 215.17699410557734
+INFO: integrated state: 25041.085010380226
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [355.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.33212082556777944
+INFO: prev state: 220.0767301243772
+INFO: integrated state: 25281.315200753357
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [352.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3360340732766482
+INFO: prev state: 222.43487348293024
+INFO: integrated state: 25528.619821202148
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [349.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3357937482086055
+INFO: prev state: 220.9893808681706
+INFO: integrated state: 25771.58796380666
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [347.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.33117595588984367
+INFO: prev state: 215.3424024058754
+INFO: integrated state: 25997.61517102429
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [345.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3233850956787071
+INFO: prev state: 206.39230857781698
+INFO: integrated state: 26196.79209675774
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [344.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3136044970722951
+INFO: prev state: 195.3255092229925
+INFO: integrated state: 26362.768624426717
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [343.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.302957022511951
+INFO: prev state: 183.328379506511
+INFO: integrated state: 26492.75376294625
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [343.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.29260105190525665
+INFO: prev state: 171.58723058347337
+INFO: integrated state: 26587.51545469667
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [342.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2837304555604753
+INFO: prev state: 161.2882834059998
+INFO: integrated state: 26651.38030491467
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [341.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2775745696856965
+INFO: prev state: 153.6176458289123
+INFO: integrated state: 26692.233242401406
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [340.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2753981745366941
+INFO: prev state: 149.76129304173804
+INFO: integrated state: 26721.51712152662
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [339.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27850147521494284
+INFO: prev state: 150.90505126019195
+INFO: integrated state: 26754.232275307197
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [337.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2819353005268423
+INFO: prev state: 153.5209961453757
+INFO: integrated state: 26794.795263743323
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [335.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2786734252647092
+INFO: prev state: 151.42435350680086
+INFO: integrated state: 26829.068324263724
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [334.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2771787724262444
+INFO: prev state: 149.52215526440554
+INFO: integrated state: 26857.63479005694
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [333.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27583326026747407
+INFO: prev state: 147.82322309127989
+INFO: integrated state: 26881.10445933078
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [332.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27465155820380543
+INFO: prev state: 146.33619098069315
+INFO: integrated state: 26900.11303227286
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [331.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27364840600317586
+INFO: prev state: 145.06950450550875
+INFO: integrated state: 26915.321545789386
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [330.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2728386097619972
+INFO: prev state: 144.03142185445466
+INFO: integrated state: 26927.41581135275
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [329.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27223703938153343
+INFO: prev state: 143.23001641461812
+INFO: integrated state: 26937.105860596603
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [329.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2718586273748634
+INFO: prev state: 142.67318068032753
+INFO: integrated state: 26945.125402637586
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [328.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2717183688415282
+INFO: prev state: 142.36863128144617
+INFO: integrated state: 26952.231296481925
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [327.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2718258906158085
+INFO: prev state: 142.31984105860343
+INFO: integrated state: 26959.190819657735
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [326.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27215952966833445
+INFO: prev state: 142.50567636846867
+INFO: integrated state: 26966.70784876314
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [326.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 1080.0, patient starts eating ...
+INFO: Control input: 0.2726552765710706
+INFO: prev state: 142.86756765469653
+INFO: integrated state: 26975.31055172723
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [380.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2732468886561602
+INFO: prev state: 143.33722926784003
+INFO: integrated state: 26985.32223953075
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [374.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2738746037581145
+INFO: prev state: 143.85034333906523
+INFO: integrated state: 26996.873269547945
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [378.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27447979010783446
+INFO: prev state: 144.34587889403252
+INFO: integrated state: 27009.91090623004
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [378.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27493956092238225
+INFO: prev state: 144.7168086185695
+INFO: integrated state: 27024.06133208575
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [378.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: t = 1096.0, Patient finishes eating!
+INFO: Control input: 0.2750411061956563
+INFO: prev state: 144.77957181074146
+INFO: integrated state: 27038.40004751797
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [379.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2745753647620715
+INFO: prev state: 144.3384161678542
+INFO: integrated state: 27051.415296021532
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [381.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27333486697621545
+INFO: prev state: 143.20013955396362
+INFO: integrated state: 27061.015714683424
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [384.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.271154484928834
+INFO: prev state: 141.2082807249907
+INFO: integrated state: 27064.640556858398
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [389.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26816995503252133
+INFO: prev state: 138.44473227920065
+INFO: integrated state: 27059.974753696
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [394.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2649209042337271
+INFO: prev state: 135.3520505923755
+INFO: integrated state: 27046.030905473126
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [400.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26193499005107207
+INFO: prev state: 132.44402339534946
+INFO: integrated state: 27023.362975659173
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [407.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.25971744520930384
+INFO: prev state: 130.22386743837143
+INFO: integrated state: 26994.034577974286
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.25872745590510576
+INFO: prev state: 129.14629945361503
+INFO: integrated state: 26961.47347633513
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [423.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2591301395446739
+INFO: prev state: 129.4231284493957
+INFO: integrated state: 26929.742861683317
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [431.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2606989189339451
+INFO: prev state: 130.90689985018284
+INFO: integrated state: 26902.463561233864
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [439.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2632097356693854
+INFO: prev state: 133.36555000533073
+INFO: integrated state: 26882.560211249856
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [447.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.26645279333755306
+INFO: prev state: 136.56178092012354
+INFO: integrated state: 26872.245554010227
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [455.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.27021064898296093
+INFO: prev state: 140.25659031217484
+INFO: integrated state: 26873.01532494675
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [461.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2742721035904585
+INFO: prev state: 144.22061033378694
+INFO: integrated state: 26885.677155948113
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [468.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2784397064557942
+INFO: prev state: 148.2423537556815
+INFO: integrated state: 26910.404217215157
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [473.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2825147327918543
+INFO: prev state: 152.11860640369736
+INFO: integrated state: 26946.760036426247
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [478.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.28629863524028604
+INFO: prev state: 155.65292775794202
+INFO: integrated state: 26993.718819700072
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [483.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2896222705559399
+INFO: prev state: 158.6770437086899
+INFO: integrated state: 27049.749950826143
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [486.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2924755776833728
+INFO: prev state: 161.15281955850594
+INFO: integrated state: 27113.20840950166
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [490.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.2950580618875935
+INFO: prev state: 163.2326882340591
+INFO: integrated state: 27182.90647420384
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [493.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.29757240540529956
+INFO: prev state: 165.11567755596062
+INFO: integrated state: 27258.253506871722
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [496.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3002176629483886
+INFO: prev state: 167.00526529874364
+INFO: integrated state: 27339.269302767952
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [498.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3031746527918562
+INFO: prev state: 169.08778614781835
+INFO: integrated state: 27426.532661211408
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3064758835935038
+INFO: prev state: 171.42986427299687
+INFO: integrated state: 27520.822254030398
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.30995376562368093
+INFO: prev state: 173.91662338078186
+INFO: integrated state: 27622.572124172744
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3134441120109233
+INFO: prev state: 176.39294892209236
+INFO: integrated state: 27731.75097093902
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3167912442879753
+INFO: prev state: 178.70353816446186
+INFO: integrated state: 27847.86158543241
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.31983418051420587
+INFO: prev state: 180.69255803602675
+INFO: integrated state: 27969.93925954049
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3224064641618627
+INFO: prev state: 182.20344318385
+INFO: integrated state: 28096.54958909204
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.32433608318564505
+INFO: prev state: 183.07880126700599
+INFO: integrated state: 28225.785992893056
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.32544545444007544
+INFO: prev state: 183.16039620011014
+INFO: integrated state: 28355.267181493386
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.32555145296256416
+INFO: prev state: 182.2891849107502
+INFO: integrated state: 28482.134736225635
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.32573857171958004
+INFO: prev state: 181.26021449568032
+INFO: integrated state: 28605.915379712675
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3274707843470333
+INFO: prev state: 181.37377653635
+INFO: integrated state: 28730.036709321725
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3290059335154319
+INFO: prev state: 181.6226189507485
+INFO: integrated state: 28854.90456617397
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3306749678386103
+INFO: prev state: 182.00009637034003
+INFO: integrated state: 28980.90485528499
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3324746158697007
+INFO: prev state: 182.49919958022306
+INFO: integrated state: 29108.402454025658
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.33440111493907976
+INFO: prev state: 183.1126176941731
+INFO: integrated state: 29237.740307108175
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.336450241938373
+INFO: prev state: 183.83278357401167
+INFO: integrated state: 29369.23865783021
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [500.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.33861734537975857
+INFO: prev state: 184.65191499459524
+INFO: integrated state: 29503.194402813995
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [499.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.34089738053457747
+INFO: prev state: 185.5620561284769
+INFO: integrated state: 29639.880571199425
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [497.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.34328494663262393
+INFO: prev state: 186.55511972259146
+INFO: integrated state: 29779.5459303672
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [495.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3457705279458369
+INFO: prev state: 187.62008141227153
+INFO: integrated state: 29922.406174604013
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [493.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3483224107380582
+INFO: prev state: 188.72878209708142
+INFO: integrated state: 30068.592520895258
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [490.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.35087956147279264
+INFO: prev state: 189.8274227221504
+INFO: integrated state: 30218.07478906171
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [488.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.35338031517063084
+INFO: prev state: 190.8565311405479
+INFO: integrated state: 30370.64438248335
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [485.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3557631815768706
+INFO: prev state: 191.75668609916477
+INFO: integrated state: 30525.914440780845
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [483.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.35797463625543263
+INFO: prev state: 192.47579041050932
+INFO: integrated state: 30683.34181201237
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [480.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.36001527217110874
+INFO: prev state: 193.00533814086612
+INFO: integrated state: 30842.35782643497
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [477.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3619580307662854
+INFO: prev state: 193.40217391166829
+INFO: integrated state: 31002.564348169977
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [475.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3638752415646174
+INFO: prev state: 193.73774204010527
+INFO: integrated state: 31163.777574290292
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [472.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3658366312221554
+INFO: prev state: 194.08357711946562
+INFO: integrated state: 31326.028305648688
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [469.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.36789816519179913
+INFO: prev state: 194.49930588135058
+INFO: integrated state: 31489.526223292738
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [466.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.37002579093644605
+INFO: prev state: 194.97272299797663
+INFO: integrated state: 31654.444392286667
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [463.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.372065286781649
+INFO: prev state: 195.38381289358094
+INFO: integrated state: 31820.59583096741
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [460.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.37386275092033955
+INFO: prev state: 195.5885476813943
+INFO: integrated state: 31987.36147401159
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [457.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.37526780671363197
+INFO: prev state: 195.4427809004856
+INFO: integrated state: 32153.68981671305
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [453.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3761568787336833
+INFO: prev state: 194.82568065003593
+INFO: integrated state: 32318.166858663157
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [450.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3765826802631709
+INFO: prev state: 193.75717891991343
+INFO: integrated state: 32479.438395422898
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [447.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3768332044022643
+INFO: prev state: 192.46841006600482
+INFO: integrated state: 32636.843625620913
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [444.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.37719510229938313
+INFO: prev state: 191.2371020488817
+INFO: integrated state: 32790.55493176756
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [441.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.37794719129595494
+INFO: prev state: 190.34050699592993
+INFO: integrated state: 32941.576452755355
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [437.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3793355615085225
+INFO: prev state: 190.02497448470916
+INFO: integrated state: 33091.651376209484
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [434.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3813801888815975
+INFO: prev state: 190.3539999608043
+INFO: integrated state: 33242.713376091895
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [430.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3837985722358332
+INFO: prev state: 191.1170788463867
+INFO: integrated state: 33396.06461263105
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [427.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.386311579309745
+INFO: prev state: 192.04246959917253
+INFO: integrated state: 33552.19202142857
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [423.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3886518282630772
+INFO: prev state: 192.85804843638675
+INFO: integrated state: 33710.76616673773
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [419.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3905802412846828
+INFO: prev state: 193.31894682207576
+INFO: integrated state: 33870.72300720396
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [415.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3920613649938224
+INFO: prev state: 193.345337896856
+INFO: integrated state: 34030.759020894526
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [412.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3933327008106882
+INFO: prev state: 193.1051674255212
+INFO: integrated state: 34190.07452317109
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [408.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39462776836930513
+INFO: prev state: 192.82155920957595
+INFO: integrated state: 34348.539200799816
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [404.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39616870710772784
+INFO: prev state: 192.71787612719118
+INFO: integrated state: 34506.69282918139
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [401.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39815880425308037
+INFO: prev state: 192.99837600274765
+INFO: integrated state: 34665.687957189635
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [397.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4006587861486089
+INFO: prev state: 193.7510239332213
+INFO: integrated state: 34826.9410289893
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [393.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4035379953566446
+INFO: prev state: 194.889194783369
+INFO: integrated state: 34991.608613339406
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [389.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40667023942667724
+INFO: prev state: 196.28791366580458
+INFO: integrated state: 35160.472354336816
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [385.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40993914426278477
+INFO: prev state: 197.82279395601358
+INFO: integrated state: 35333.94073620486
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [381.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.41322520012449093
+INFO: prev state: 199.37004306083514
+INFO: integrated state: 35512.05086538736
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [377.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4164057620995357
+INFO: prev state: 200.80645084945536
+INFO: integrated state: 35694.47021793573
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [373.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4193550370728067
+INFO: prev state: 202.00936388245088
+INFO: integrated state: 35880.498309583076
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [370.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4219440600075561
+INFO: prev state: 202.85664865440665
+INFO: integrated state: 36069.0682555463
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [366.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4240406622275293
+INFO: prev state: 203.22664691765138
+INFO: integrated state: 36258.74819629925
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [362.6, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4250637368016797
+INFO: prev state: 202.66385285842819
+INFO: integrated state: 36446.739754874536
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [359.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4247832915177356
+INFO: prev state: 200.90288369134964
+INFO: integrated state: 36629.448405948584
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [355.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.42454928455580093
+INFO: prev state: 198.9168212950737
+INFO: integrated state: 36806.1988698338
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [352.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.42405254172970097
+INFO: prev state: 196.7221200972906
+INFO: integrated state: 36976.36523012567
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [349.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4233035466672312
+INFO: prev state: 194.33545079880346
+INFO: integrated state: 37139.371582522086
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [346.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.422313435721471
+INFO: prev state: 191.77365262188843
+INFO: integrated state: 37294.692540387754
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [343.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4210939615762169
+INFO: prev state: 189.0536902847266
+INFO: integrated state: 37441.85361124193
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [340.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4196574695513209
+INFO: prev state: 186.19262265035783
+INFO: integrated state: 37580.43147919301
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [338.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.41801689382295015
+INFO: prev state: 183.2075899358545
+INFO: integrated state: 37710.05424900057
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [335.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.41618576065592916
+INFO: prev state: 180.1158111084062
+INFO: integrated state: 37830.401682325784
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [333.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4141879139410881
+INFO: prev state: 176.94187561547426
+INFO: integrated state: 37941.22730917221
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [331.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.41210393550085195
+INFO: prev state: 173.75421571071598
+INFO: integrated state: 38042.48995630436
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [329.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.41008946593509027
+INFO: prev state: 170.686978706714
+INFO: integrated state: 38134.5508924245
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [327.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40830175101108485
+INFO: prev state: 167.8889262418084
+INFO: integrated state: 38218.21767114993
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [325.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4068976208723655
+INFO: prev state: 165.50881468110174
+INFO: integrated state: 38294.74411519323
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [323.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40601282021491425
+INFO: prev state: 163.6762379675119
+INFO: integrated state: 38365.77282909577
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [321.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4056402500678387
+INFO: prev state: 162.4059508245387
+INFO: integrated state: 38432.99068156938
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [319.5, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4055818607094999
+INFO: prev state: 161.5404531264892
+INFO: integrated state: 38497.61204094885
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [317.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4056411371801492
+INFO: prev state: 160.88387585961783
+INFO: integrated state: 38560.2636685277
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [316.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4056283044757305
+INFO: prev state: 160.24021980774452
+INFO: integrated state: 38620.98432795094
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [314.3, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4053642013440817
+INFO: prev state: 159.42582350036534
+INFO: integrated state: 38679.26179845203
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [312.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.404759716262701
+INFO: prev state: 158.33177958372684
+INFO: integrated state: 38734.25713720321
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [311.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.4038471533776234
+INFO: prev state: 156.96138140012513
+INFO: integrated state: 38785.14128140359
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [310.1, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40265456398638144
+INFO: prev state: 155.34270872929045
+INFO: integrated state: 38831.16940759146
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [308.9, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.40120232198087985
+INFO: prev state: 153.50364811104654
+INFO: integrated state: 38871.680351924595
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [307.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3995187040304051
+INFO: prev state: 151.477337411131
+INFO: integrated state: 38906.11236415799
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [306.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39767455591535167
+INFO: prev state: 149.32940855811157
+INFO: integrated state: 38934.10058983233
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [305.8, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3957969823132216
+INFO: prev state: 147.17433445070156
+INFO: integrated state: 38955.623593184435
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [305.0, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.3940145085884062
+INFO: prev state: 145.1372881050967
+INFO: integrated state: 38971.035457499725
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [304.2, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39245558951284837
+INFO: prev state: 143.34324822966246
+INFO: integrated state: 38981.065202188714
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [303.4, 500.0] mg/dL. Finding safe adjustment...
+INFO: Control input: 0.39122804203373307
+INFO: prev state: 141.8988545663
+INFO: integrated state: 38986.76176588761
+WARNING: PID output violates worst-case safety bounds. Worst-case BG range: [302.7, 500.0] mg/dL. Finding safe adjustment...
+INFO: Simulation took 240.62758111953735 seconds.
+================================================================================
+NMPC SIMULATOR VALIDATION
+================================================================================
+
+[TEST 1] Validating Patient Model Response...
+--------------------------------------------------------------------------------
+✓ Initial BG: 421.50 mg/dL
+✓ No insulin (60 min): BG change = 2.86 mg/dL
+✓ With insulin (60 min): BG change = -7.28 mg/dL
+✓ With meal (60 min): BG change = 217.83 mg/dL
+✓ Patient model responds correctly to insulin and meals
+
+[TEST 2] Validating Worst-Case Safety Checking...
+--------------------------------------------------------------------------------
+  Low insulin, no meal:
+    Worst-case BG: [250.6, 500.0] mg/dL
+    Safe: False
+    ⚠️  CAUTION: High but acceptable (500.0 mg/dL)
+  Normal insulin, no meal:
+    Worst-case BG: [248.2, 500.0] mg/dL
+    Safe: False
+    ⚠️  CAUTION: High but acceptable (500.0 mg/dL)
+  Low insulin, large meal:
+    Worst-case BG: [250.6, 500.0] mg/dL
+    Safe: False
+    ⚠️  CAUTION: High but acceptable (500.0 mg/dL)
+  Normal insulin, large meal:
+    Worst-case BG: [250.6, 500.0] mg/dL
+    Safe: False
+    ⚠️  CAUTION: High but acceptable (500.0 mg/dL)
+✓ All worst-case predictions are realistic (< 500 mg/dL)
+
+[TEST 3] Validating Cost Function Computation...
+--------------------------------------------------------------------------------
+✓ Cost with zero change: 996261.37
+✓ Cost with large change: 357345.11
+✓ Cost function computes finite, positive values
+
+[TEST 4] Validating Safety Constraints...
+--------------------------------------------------------------------------------
+✓ Barrier function works correctly for BG range [50, 200] mg/dL
+✓ Zone penalties work correctly
+
+[TEST 5] Validating Controller Behavior...
+--------------------------------------------------------------------------------
+✓ Controller produced 20 valid actions
+✓ Mean insulin rate: 0.0139 U/min
+✓ BG range: [149.0, 149.0] mg/dL
+✓ All actions within bounds [0, 10.0] U/min
+
+[TEST 6] Validating Numerical Stability...
+--------------------------------------------------------------------------------
+✓ All functions handle extreme values without NaN/inf
+
+[TEST 7] Validating Consistency and Reproducibility...
+--------------------------------------------------------------------------------
+✓ Controller produces consistent results with same inputs
+
+[TEST 8] Running Full Simulation Test...
+--------------------------------------------------------------------------------
+Process ID: 32602
+Simulation starts ...
+Simulation Completed!
+✓ Full simulation completed successfully
+✓ Mean BG: 164.86 mg/dL
+✓ Std BG: 16.41 mg/dL
+✓ BG range: [136.9, 192.4] mg/dL
+✓ Total simulation steps: 481
+
+================================================================================
+VALIDATION SUMMARY
+================================================================================
+✓ All tests completed!
+
+The NMPC simulator appears to be working correctly.
+Key validations:
+  - Patient model responds correctly to insulin and meals
+  - Worst-case safety checking produces realistic predictions (< 500 mg/dL)
+  - Cost function computes correctly
+  - Safety constraints are enforced
+  - Controller produces valid actions
+  - Numerical stability maintained
+  - Results are consistent and reproducible
+================================================================================

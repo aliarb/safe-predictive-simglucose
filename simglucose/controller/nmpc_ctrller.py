@@ -165,6 +165,12 @@ class NMPCController(Controller):
         self.acc = 1e-3  # Minimum accuracy of optimization method
         self.max_time = 100  # Maximum computation time (seconds)
         
+        # Multi-start heuristic parameters
+        self.use_multi_start = False  # Enable multi-start optimization
+        self.num_starting_points = 3  # Number of random starting points (including warm start)
+        self.parallel_starts = False  # Run starts in parallel (requires multiprocessing)
+        self.start_point_spread = 0.3  # Spread of random starting points (fraction of constraint range)
+        
         # Control parameters
         self.insulin_max = 10.0  # Maximum insulin rate (U/min)
         self.insulin_min = 0.0  # Minimum insulin rate (U/min)
@@ -348,10 +354,14 @@ class NMPCController(Controller):
         Check if insulin rate is safe in worst-case scenarios.
         
         Worst-case scenarios considered:
-        1. Maximum meal disturbance (unexpected large meal)
+        1. Maximum meal disturbance (unexpected large meal, transient)
         2. Minimum insulin sensitivity (worst-case patient response)
-        3. Maximum glucose rise rate
-        4. Minimum glucose fall rate
+        3. Combined worst case (large meal + reduced sensitivity)
+        
+        Uses realistic assumptions:
+        - Meals are transient (max 15 minutes duration)
+        - Shorter prediction horizon (30-60 minutes for worst-case checks)
+        - Realistic meal rates (25-30 g/min max)
         
         Parameters
         ----------
@@ -377,25 +387,38 @@ class NMPCController(Controller):
         worst_case_bg_max : float
             Maximum BG predicted in worst-case scenarios
         """
-        # Worst-case parameters
-        max_meal_disturbance = 100.0  # g/min - unexpected large meal
+        # Realistic worst-case parameters
+        max_meal_rate = 30.0  # g/min - large but realistic meal (was 100.0)
+        max_meal_duration = 15.0  # minutes - meals are transient, not constant
         insulin_sensitivity_factor = 0.7  # 70% of normal sensitivity (worst case)
+        MAX_REALISTIC_BG = 500.0  # mg/dL - cap unrealistic predictions
         
-        # Prepare worst-case scenarios
+        # Shorter horizon for worst-case checking (30 minutes to 1 hour)
+        # Convert to number of steps: 30-60 min / sample_time
+        worst_case_horizon_minutes = 60.0  # 1 hour max
+        worst_case_horizon_steps = min(
+            int(np.ceil(worst_case_horizon_minutes / sample_time)),
+            self.NP  # Don't exceed normal prediction horizon
+        )
+        
+        # Prepare worst-case scenarios with transient meals
         worst_case_scenarios = [
             {
-                'name': 'max_meal',
-                'meal': max_meal_disturbance,
+                'name': 'large_meal_transient',
+                'meal_rate': max_meal_rate,
+                'meal_duration': max_meal_duration,
                 'insulin_multiplier': 1.0  # Normal insulin sensitivity
             },
             {
-                'name': 'min_insulin_sensitivity',
-                'meal': meal,  # Current meal
+                'name': 'reduced_sensitivity',
+                'meal_rate': meal,  # Current meal
+                'meal_duration': max_meal_duration if meal > 0 else 0,
                 'insulin_multiplier': insulin_sensitivity_factor  # Reduced sensitivity
             },
             {
                 'name': 'combined_worst_case',
-                'meal': max_meal_disturbance,
+                'meal_rate': max_meal_rate,
+                'meal_duration': max_meal_duration,
                 'insulin_multiplier': insulin_sensitivity_factor
             }
         ]
@@ -418,19 +441,19 @@ class NMPCController(Controller):
             # Adjust insulin for sensitivity
             adjusted_insulin = insulin_rate * scenario['insulin_multiplier']
             
-            # Predict forward with worst-case meal
-            scenario_params = other_params.copy()
-            scenario_params['meal'] = scenario['meal']
-            scenario_params['u_prev'] = adjusted_insulin
-            
-            # Predict over horizon
-            bg_predictions = self._predict_glucose_trajectory(
+            # Predict forward with transient meal
+            bg_predictions = self._predict_glucose_trajectory_transient(
                 current_state=current_state,
                 insulin_rate=adjusted_insulin,
-                meal_rate=scenario['meal'],
+                meal_rate=scenario['meal_rate'],
+                meal_duration=scenario['meal_duration'],
                 sample_time=sample_time,
-                other_params=scenario_params
+                horizon_steps=worst_case_horizon_steps,
+                other_params=other_params
             )
+            
+            # Cap unrealistic predictions
+            bg_predictions = np.clip(bg_predictions, 0, MAX_REALISTIC_BG)
             
             # Find min/max BG in prediction
             bg_min = np.min(bg_predictions)
@@ -439,7 +462,15 @@ class NMPCController(Controller):
             worst_case_bg_min = min(worst_case_bg_min, bg_min)
             worst_case_bg_max = max(worst_case_bg_max, bg_max)
             
-            logger.debug(f"Scenario '{scenario['name']}': BG range [{bg_min:.1f}, {bg_max:.1f}] mg/dL")
+            logger.debug(f"Scenario '{scenario['name']}': BG range [{bg_min:.1f}, {bg_max:.1f}] mg/dL "
+                        f"(horizon: {worst_case_horizon_steps} steps, meal: {scenario['meal_rate']:.1f} g/min "
+                        f"for {scenario['meal_duration']:.1f} min)")
+        
+        # Sanity check: cap unrealistic predictions
+        if worst_case_bg_max > MAX_REALISTIC_BG:
+            logger.warning(f"Worst-case BG prediction capped at {MAX_REALISTIC_BG} mg/dL "
+                          f"(was {worst_case_bg_max:.1f} mg/dL)")
+            worst_case_bg_max = MAX_REALISTIC_BG
         
         # Check if worst-case predictions violate safety bounds
         is_safe = (worst_case_bg_min >= self.bg_min) and (worst_case_bg_max <= self.bg_max)
@@ -499,6 +530,106 @@ class NMPCController(Controller):
             z_current = z[:, i].copy()
             
             for ode_step in range(num_ode_steps):
+                out_temp, dz = self._patient_model_step(z_current, u_for_model, dz0, scenario_params)
+                
+                if not np.all(np.isfinite(dz)):
+                    dz = np.nan_to_num(dz, nan=0.0, posinf=0.0, neginf=0.0)
+                
+                z_current = z_current + dz * actual_ode_dt
+                
+                if not np.all(np.isfinite(z_current)):
+                    z_current = np.nan_to_num(z_current, nan=z[:, i], posinf=z[:, i], neginf=z[:, i])
+            
+            z[:, i+1] = z_current
+            bg_predictions[i+1] = z[:, i+1][3] * Vg
+        
+        return bg_predictions
+    
+    def _predict_glucose_trajectory_transient(self,
+                                              current_state: np.ndarray,
+                                              insulin_rate: float,
+                                              meal_rate: float,
+                                              meal_duration: float,
+                                              sample_time: float,
+                                              horizon_steps: int,
+                                              other_params: dict) -> np.ndarray:
+        """
+        Predict glucose trajectory with transient meal (meal decays after duration).
+        
+        This method models meals as transient disturbances that decay over time,
+        rather than constant rates. This is more realistic for worst-case safety checking.
+        
+        Parameters
+        ----------
+        current_state : np.ndarray
+            Current patient state
+        insulin_rate : float
+            Insulin rate (U/min)
+        meal_rate : float
+            Peak meal rate (g/min)
+        meal_duration : float
+            Duration of meal (minutes). After this, meal rate decays to zero.
+        sample_time : float
+            Sample time (minutes)
+        horizon_steps : int
+            Number of prediction steps (shorter than full horizon)
+        other_params : dict
+            Additional parameters
+        
+        Returns
+        -------
+        bg_predictions : np.ndarray
+            Predicted BG values over horizon (mg/dL)
+        """
+        z = np.zeros((len(current_state), horizon_steps + 1))
+        z[:, 0] = current_state.copy()
+        dz0 = np.zeros(len(current_state))
+        
+        # Convert insulin to array format
+        u_for_model = np.array([insulin_rate])
+        
+        # ODE time step
+        ode_dt = self.ode_time_step
+        num_ode_steps = max(1, int(np.ceil(sample_time / ode_dt)))
+        actual_ode_dt = sample_time / num_ode_steps
+        
+        bg_predictions = np.zeros(horizon_steps + 1)
+        Vg = self._get_param('Vg', 1.0)
+        bg_predictions[0] = current_state[3] * Vg  # Initial BG
+        
+        # Predict forward with transient meal
+        for i in range(horizon_steps):
+            z_current = z[:, i].copy()
+            
+            # Calculate current time in prediction
+            current_time = i * sample_time
+            
+            # Calculate transient meal rate (constant during meal_duration, then zero)
+            if meal_duration > 0 and current_time < meal_duration:
+                # Meal is at peak rate during meal_duration
+                current_meal_rate = meal_rate
+            else:
+                # Meal has ended
+                current_meal_rate = 0.0
+            
+            # Update meal in scenario params
+            scenario_params = other_params.copy()
+            scenario_params['meal'] = current_meal_rate
+            scenario_params['u_prev'] = insulin_rate
+            
+            # Integrate over ODE steps
+            for ode_step in range(num_ode_steps):
+                # Calculate meal rate for this ODE step (within the sample time)
+                ode_time = current_time + ode_step * actual_ode_dt
+                if meal_duration > 0 and ode_time < meal_duration:
+                    # Meal is at peak rate during meal_duration
+                    ode_meal_rate = meal_rate
+                else:
+                    # Meal has ended
+                    ode_meal_rate = 0.0
+                
+                scenario_params['meal'] = ode_meal_rate
+                
                 out_temp, dz = self._patient_model_step(z_current, u_for_model, dz0, scenario_params)
                 
                 if not np.all(np.isfinite(dz)):
@@ -803,6 +934,176 @@ class NMPCController(Controller):
                     f"converged={'yes' if np.linalg.norm(dx, 2) <= acc else 'no'}")
         
         return Un
+    
+    def _optimize_multi_start(self, x, xd, u_old, DT, NP, maxiteration, alfa, acc, other, max_time):
+        """
+        Multi-start optimization with random and parallel starting points.
+        
+        This heuristic approach helps escape local minima by:
+        1. Using warm start (previous solution)
+        2. Generating random starting points around the warm start
+        3. Running optimization from each starting point
+        4. Selecting the best solution
+        
+        Parameters
+        ----------
+        x : np.ndarray
+            Current patient state (13-dimensional)
+        xd : np.ndarray
+            Desired/target state
+        u_old : np.ndarray
+            Previous control input (warm start)
+        DT : float
+            Time step (minutes)
+        NP : int
+            Prediction horizon steps
+        maxiteration : int
+            Maximum optimization iterations per start
+        alfa : float
+            Learning rate
+        acc : float
+            Minimum accuracy/convergence tolerance
+        other : dict
+            Additional parameters (meal, patient_params, etc.)
+        max_time : float
+            Maximum computation time (seconds) - divided among starts
+        
+        Returns
+        -------
+        U_best : np.ndarray
+            Best optimized control input across all starting points
+        """
+        if not self.use_multi_start:
+            # Fall back to single-start optimization
+            return self._optimize(x, xd, u_old, DT, NP, maxiteration, alfa, acc, other, max_time)
+        
+        u_prev = other.get('u_prev', self._compute_basal())
+        current_bg_approx = x[3] * self._get_param('Vg', 1.0) if len(x) > 3 else 140.0
+        
+        # Determine adaptive ΔU bounds for generating starting points
+        if current_bg_approx > self.bg_max:
+            delta_u_max = 1.0
+            delta_u_min = -0.5
+        elif current_bg_approx < self.bg_min:
+            delta_u_max = 0.1
+            delta_u_min = -1.0
+        else:
+            delta_u_max = 0.5
+            delta_u_min = -0.5
+        
+        # Generate starting points
+        starting_points = []
+        
+        # 1. Warm start (previous solution)
+        starting_points.append({
+            'delta_u': u_old.copy(),
+            'name': 'warm_start'
+        })
+        
+        # 2. Random starting points
+        num_random = self.num_starting_points - 1  # Subtract warm start
+        for i in range(num_random):
+            # Generate random starting point within bounds
+            if self.start_point_spread > 0:
+                # Random point around warm start
+                spread = (delta_u_max - delta_u_min) * self.start_point_spread
+                random_delta = u_old[0] + np.random.uniform(-spread, spread)
+                random_delta = np.clip(random_delta, delta_u_min, delta_u_max)
+            else:
+                # Uniform random across entire range
+                random_delta = np.random.uniform(delta_u_min, delta_u_max)
+            
+            starting_points.append({
+                'delta_u': np.array([random_delta]),
+                'name': f'random_start_{i+1}'
+            })
+        
+        # Time budget per start
+        time_per_start = max_time / len(starting_points) if len(starting_points) > 0 else max_time
+        
+        # Run optimizations
+        results = []
+        
+        if self.parallel_starts:
+            # Parallel execution (requires multiprocessing)
+            try:
+                from multiprocessing import Pool, cpu_count
+                import functools
+                
+                # Prepare arguments for parallel execution
+                optimize_args = []
+                for start in starting_points:
+                    optimize_args.append((
+                        x, xd, start['delta_u'], DT, NP,
+                        maxiteration, alfa, acc, other, time_per_start
+                    ))
+                
+                # Run in parallel (limit to CPU count)
+                num_workers = min(len(starting_points), cpu_count())
+                # Note: multiprocessing requires pickling, which may not work with all objects
+                # For now, fall back to sequential if parallel fails
+                try:
+                    from pickle import PicklingError
+                    with Pool(processes=num_workers) as pool:
+                        # Map arguments to wrapper
+                        solutions = pool.map(self._optimize_single_start_wrapper, optimize_args)
+                    
+                    # Collect results
+                    for i, (start, solution) in enumerate(zip(starting_points, solutions)):
+                        if solution is not None and np.all(np.isfinite(solution)):
+                            cost = self._mainfun(xd, x, solution, DT, NP, other)
+                            if np.isfinite(cost):
+                                results.append({
+                                    'start': start['name'],
+                                    'delta_u': solution,
+                                    'cost': cost
+                                })
+                except (PicklingError, AttributeError, Exception) as e:
+                    logger.warning(f"Parallel execution not possible: {e}, using sequential")
+                    self.parallel_starts = False
+            except Exception as e:
+                logger.warning(f"Parallel optimization failed: {e}, falling back to sequential")
+                self.parallel_starts = False
+        
+        if not self.parallel_starts:
+            # Sequential execution
+            for start in starting_points:
+                try:
+                    solution = self._optimize(
+                        x, xd, start['delta_u'], DT, NP,
+                        maxiteration, alfa, acc, other, time_per_start
+                    )
+                    
+                    if solution is not None and np.all(np.isfinite(solution)):
+                        cost = self._mainfun(xd, x, solution, DT, NP, other)
+                        results.append({
+                            'start': start['name'],
+                            'delta_u': solution,
+                            'cost': cost
+                        })
+                except Exception as e:
+                    logger.warning(f"Optimization from {start['name']} failed: {e}")
+                    continue
+        
+        # Select best solution (lowest cost)
+        if len(results) == 0:
+            logger.warning("All multi-start optimizations failed, using warm start")
+            return u_old.copy()
+        
+        best_result = min(results, key=lambda r: r['cost'])
+        logger.debug(f"Multi-start: {len(results)}/{len(starting_points)} converged, "
+                    f"best from {best_result['start']} with cost {best_result['cost']:.2f}")
+        
+        return best_result['delta_u']
+    
+    def _optimize_single_start_wrapper(self, args):
+        """Wrapper for parallel execution."""
+        x, xd, u_old, DT, NP, maxiteration, alfa, acc, other, max_time = args
+        try:
+            return self._optimize(x, xd, u_old, DT, NP, maxiteration, alfa, acc, other, max_time)
+        except Exception as e:
+            logger.warning(f"Optimization failed in parallel: {e}")
+            return None
     
     def _mainfun(self, xd, x, delta_u, DelT, NP, other):
         """
