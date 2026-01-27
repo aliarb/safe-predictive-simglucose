@@ -1,0 +1,124 @@
+\section{Analytical BG--Insulin Model (Simulator Plant)}
+\label{sec:plant-model}
+%
+This work uses the nonlinear glucose--insulin dynamics implemented in the \texttt{simglucose} virtual patient (see \texttt{simglucose/patient/t1dpatient.py}). The model is an ODE system with meal intake and subcutaneous insulin infusion as exogenous inputs.
+
+\subsection{States, inputs, and outputs}
+Let the state vector be
+\begin{equation}
+x(t)=
+\begin{bmatrix}
+Q_{sto}^{s} & Q_{sto}^{l} & Q_{gut} & Q_{1} & Q_{2} & I_{p} & X & I_{1} & I_{2} & I_{l} & S_{1} & S_{2} & G_{sc}
+\end{bmatrix}^{\!\top},
+\end{equation}
+where \(Q_{sto}^{s}\) and \(Q_{sto}^{l}\) are solid and liquid glucose in the stomach (mg), \(Q_{gut}\) is intestinal glucose (mg), \(Q_{1},Q_{2}\) are glucose masses in plasma and peripheral compartments (mg/kg), \(I_p\) is plasma insulin mass (pmol/kg), \(I_l\) is liver insulin (pmol/kg), \(X\) is insulin action on utilization, \(I_1,I_2\) are delayed insulin action states, \(S_1,S_2\) are subcutaneous insulin compartments (pmol/(kg)), and \(G_{sc}\) is subcutaneous glucose mass (mg/kg).
+
+The input vector is
+\begin{equation}
+u(t)=
+\begin{bmatrix}
+D(t)\\
+u_I(t)
+\end{bmatrix},
+\end{equation}
+where \(D(t)\) is the carbohydrate ingestion rate in mg/min and \(u_I(t)\) is the insulin infusion rate in pmol/(kg$\cdot$min). If the pump command is provided in units of U/min, the simulator converts it using \(1\,\mathrm{U}=6000\,\mathrm{pmol}\) and patient body weight \(BW\) (kg) as
+\begin{equation}
+u_I(t)=\frac{6000}{BW}\,u(t)\qquad [\mathrm{pmol/(kg\cdot min)}].
+\end{equation}
+
+The plasma glucose concentration and the subcutaneous (observable) glucose concentration are
+\begin{equation}
+G_p(t)=\frac{Q_1(t)}{V_g},\qquad
+G_{sub}(t)=\frac{G_{sc}(t)}{V_g},
+\end{equation}
+where \(V_g\) is the glucose distribution volume (dL/kg).
+
+\subsection{Meal absorption (stomach--gut)}
+Define the total stomach content \(Q_{sto}(t)=Q_{sto}^{s}(t)+Q_{sto}^{l}(t)\). The stomach and gut dynamics are
+\begin{align}
+\dot Q_{sto}^{s} &= -k_{\max}Q_{sto}^{s} + D,\\
+\dot Q_{sto}^{l} &= k_{\max}Q_{sto}^{s} - k_{gut}Q_{sto}^{l},\\
+\dot Q_{gut} &= k_{gut}Q_{sto}^{l} - k_{abs}Q_{gut}.
+\end{align}
+The gastric emptying rate \(k_{gut}\) is a nonlinear function of \(Q_{sto}\) and an effective stomach content \(\bar D\) (constructed internally by the simulator from recently ingested and remaining stomach content):
+\begin{equation}
+k_{gut}=k_{\min}+\frac{k_{\max}-k_{\min}}{2}\left(
+\tanh\!\big(a(Q_{sto}-b\bar D)\big)-\tanh\!\big(c(Q_{sto}-d\bar D)\big)+2
+\right),
+\end{equation}
+with
+\begin{equation}
+a=\frac{5}{2\bar D(1-b)},\qquad c=\frac{5}{2\bar D d}.
+\end{equation}
+The rate of appearance of glucose in plasma is
+\begin{equation}
+R_a=\frac{f\,k_{abs}}{BW}\,Q_{gut}.
+\end{equation}
+
+\subsection{Glucose kinetics (two compartments)}
+Endogenous glucose production (EGP) is modeled as
+\begin{equation}
+EGP = k_{p1}-k_{p2}Q_1-k_{p3}I_2.
+\end{equation}
+Renal excretion is thresholded:
+\begin{equation}
+E = k_{e1}\,\max(Q_1-k_{e2},\,0),
+\end{equation}
+and non--insulin-dependent utilization is \(U_{ii}=F_{snc}\).
+
+Insulin-dependent glucose utilization uses
+\begin{equation}
+V_m = V_{m0}+V_{mx}X,\qquad K_m=K_{m0},\qquad
+U_{id} = \frac{V_m\,Q_2}{K_m+Q_2}.
+\end{equation}
+The glucose mass dynamics are
+\begin{align}
+\dot Q_1 &= \max(EGP,0)+R_a-U_{ii}-E-k_1Q_1+k_2Q_2,\\
+\dot Q_2 &= -U_{id}+k_1Q_1-k_2Q_2.
+\end{align}
+
+\subsection{Insulin kinetics and action}
+Plasma insulin mass \(I_p\) evolves as
+\begin{equation}
+\dot I_p=-(m_2+m_4)I_p+m_1I_l+k_{a1}S_1+k_{a2}S_2,\qquad
+I=\frac{I_p}{V_i},
+\end{equation}
+where \(I\) is plasma insulin concentration (pmol/L) and \(V_i\) is insulin distribution volume.
+
+Insulin action dynamics are
+\begin{align}
+\dot X &= -p_{2u}X+p_{2u}(I-I_b),\\
+\dot I_1 &= -k_i(I_1-I),\\
+\dot I_2 &= -k_i(I_2-I_1),
+\end{align}
+where \(I_b\) is basal insulin concentration.
+
+The liver insulin compartment and subcutaneous insulin absorption are
+\begin{align}
+\dot I_l &= -(m_1+m_{30})I_l+m_2 I_p,\\
+\dot S_1 &= u_I-(k_{a1}+k_d)S_1,\\
+\dot S_2 &= k_d S_1-k_{a2}S_2.
+\end{align}
+
+\subsection{Subcutaneous glucose}
+Subcutaneous glucose is modeled as a first-order lag from plasma glucose mass:
+\begin{equation}
+\dot G_{sc}=-k_{sc}G_{sc}+k_{sc}Q_1,\qquad
+G_{sub}=\frac{G_{sc}}{V_g}.
+\end{equation}
+
+\subsection{Safety and robustness indices}
+\noindent The \textit{safety} of the system is quantified using the Safety Performance Index (SPI), defined as the time-averaged magnitude of constraint violations:
+\begin{equation}
+\mathcal{SPI} = \frac{1}{T} \int_{0}^{T} \Big( \max\!\big(0,\, y(t) - y_{\max}\big) + \max\!\big(0,\, y_{\min} - y(t)\big) \Big)\, dt,
+\end{equation}
+where \(y(t)\) is the glucose concentration at time \(t\), and \(y_{\min}\) and \(y_{\max}\) are the lower and upper safe bounds, respectively. \textit{Lower} values of \(\mathcal{SPI}\) indicate fewer/smaller safety violations, with \(\mathcal{SPI}=0\) corresponding to perfect safety (no violations).
+
+\noindent The system's \textit{robustness} to dynamic disturbances is characterized by the Robustness Index (RI), defined as a disturbance-normalized integral tracking error:
+\begin{equation}
+\mathcal{RI} = \frac{1}{\|d\|_2} \int_{0}^{T} \big|y(t) - y_{\mathrm{ref}}\big|\, dt,
+\qquad
+\|d\|_2 \triangleq \left(\int_{0}^{T} d(t)^2\, dt\right)^{\tfrac12},
+\end{equation}
+where \(d(t)\) denotes the disturbance profile (e.g., meal/glucose appearance or other exogenous inputs) and \(y_{\mathrm{ref}}\) is the reference glucose level. \textit{Lower} values of \(\mathcal{RI}\) indicate smaller deviation from the reference per unit disturbance energy, hence higher robustness. (When the same disturbance profile is used across controllers, \(\|d\|_2\) is constant and \(\mathcal{RI}\) reduces to the integral absolute error up to a constant scaling.)
+

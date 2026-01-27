@@ -3,11 +3,15 @@
 Standalone script to generate publication-quality plots from saved NMPC tuning history.
 
 Usage:
-    python plot_nmpc_tuning.py [history_file.json] [output_file.png]
+    python plot_nmpc_tuning.py [history_file.(json|csv)] [output_file.(png|pdf)]
 
 If no arguments provided, uses default files:
-    - Input: nmpc_training_history.json
-    - Output: nmpc_rl_tuning_results.png
+    - Input: results/rl_finetuning/training_history.csv
+    - Output: results/rl_finetuning/training_history.png
+
+Notes:
+- Paper workflow: run `python examples/rl_finetune_nmpc_for_paper.py` (writes CSV + PNG).
+- Legacy workflow: `tune_nmpc_with_rl.py` wrote `nmpc_training_history.json` (still supported).
 """
 import sys
 import json
@@ -196,21 +200,52 @@ def plot_training_history(history, save_path='nmpc_rl_tuning_results.png', dpi=3
 
 if __name__ == "__main__":
     # Parse command line arguments
-    history_file = sys.argv[1] if len(sys.argv) > 1 else 'nmpc_training_history.json'
-    output_file = sys.argv[2] if len(sys.argv) > 2 else 'nmpc_rl_tuning_results.png'
+    history_file = sys.argv[1] if len(sys.argv) > 1 else 'results/rl_finetuning/training_history.csv'
+    output_file = sys.argv[2] if len(sys.argv) > 2 else 'results/rl_finetuning/training_history.png'
     
     print(f"Loading training history from {history_file}...")
     try:
-        with open(history_file, 'r') as f:
-            history = json.load(f)
-        print(f"Loaded {len(history['episode_rewards'])} episodes")
-        
-        # Generate plots
-        plot_training_history(history, save_path=output_file, dpi=300)
+        if history_file.lower().endswith(".csv"):
+            import pandas as pd
+
+            df = pd.read_csv(history_file)
+            if "idx" not in df.columns or "score" not in df.columns:
+                raise ValueError("CSV must contain at least columns: idx, score")
+
+            # Simple IEEE-friendly plot matching `rl_finetune_nmpc_for_paper.py`
+            fig, ax = plt.subplots(1, 1, figsize=(10, 5))
+            if "is_baseline" in df.columns:
+                base = df[df["is_baseline"] == True]  # noqa: E712
+                non_base = df[df["is_baseline"] == False]  # noqa: E712
+                if len(base) > 0:
+                    ax.axhline(float(base.iloc[0]["score"]), color="gray", linestyle="--", linewidth=1.5,
+                               label="Baseline score")
+            else:
+                non_base = df
+
+            ax.plot(non_base["idx"], non_base["score"], color="#57068C", linewidth=2, label="Candidate score")
+            ax.set_xlabel("Candidate #")
+            ax.set_ylabel("Score")
+            ax.set_title("RL-style Finetuning Progress")
+            ax.grid(True, alpha=0.3, linestyle="--")
+            ax.legend(loc="best")
+            fig.tight_layout()
+            fig.savefig(output_file, dpi=300, bbox_inches="tight", facecolor="white")
+            plt.close(fig)
+            print(f"Saved plot to {output_file}")
+        else:
+            with open(history_file, 'r') as f:
+                history = json.load(f)
+            print(f"Loaded {len(history['episode_rewards'])} episodes")
+
+            # Generate plots (legacy RL-env format)
+            plot_training_history(history, save_path=output_file, dpi=300)
         
     except FileNotFoundError:
         print(f"Error: File {history_file} not found.")
-        print("Please run tune_nmpc_with_rl.py first to generate training history.")
+        print("Please run:")
+        print("  python examples/rl_finetune_nmpc_for_paper.py")
+        print("to generate: results/rl_finetuning/training_history.csv")
         sys.exit(1)
     except Exception as e:
         print(f"Error: {e}")

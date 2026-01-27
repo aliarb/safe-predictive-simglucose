@@ -1,57 +1,45 @@
 #!/usr/bin/env python3
 """
-Quick script to run RL tuning and generate plots.
-Uses fewer episodes for faster execution.
-"""
-import sys
-sys.path.insert(0, '.')
+Quick wrapper for the paper-ready finetuning script.
 
-from tune_nmpc_with_rl import (
-    NMPCTuningEnv, SimpleRLAgent, train_rl_agent, 
-    plot_training_history, save_training_history
-)
-from simglucose.simulation.scenario import CustomScenario
-from datetime import datetime
+This repo now uses `examples/rl_finetune_nmpc_for_paper.py` (candidate search)
+instead of the step-by-step RL environment in `tune_nmpc_with_rl.py`, because
+it is designed to finish reliably and save:
+- results/rl_finetuning/best_params.json
+- results/rl_finetuning/training_history.csv
+- results/rl_finetuning/training_history.png
+"""
+from __future__ import annotations
+
+import subprocess
+import sys
+from pathlib import Path
 
 if __name__ == "__main__":
+    script = Path(__file__).with_name("rl_finetune_nmpc_for_paper.py")
+    cmd = [
+        sys.executable,
+        str(script),
+        "--candidates",
+        "15",
+        "--tune_hours",
+        "6",
+        "--final_hours",
+        "24",
+        "--seed",
+        "0",
+    ]
+
     print("=" * 70)
-    print("QUICK RL TUNING FOR PLOT GENERATION")
+    print("QUICK PAPER-READY FINETUNING (CANDIDATE SEARCH)")
     print("=" * 70)
-    
-    # Create meal scenario
-    start_time = datetime(2025, 1, 1, 0, 0, 0)
-    scenario = CustomScenario(
-        start_time=start_time,
-        scenario=[(7, 45), (12, 70), (18, 80)]  # Meals at 7am, 12pm, 6pm
-    )
-    
-    # Create environment
-    env = NMPCTuningEnv(
-        patient_name='adolescent#001',
-        custom_scenario=scenario,
-        episode_length=72,  # Very short episodes (6 hours) for faster training
-        seed=42
-    )
-    
-    # Create RL agent
-    agent = SimpleRLAgent(learning_rate=0.01)
-    
-    # Train agent with fewer episodes for quick plot generation
-    num_episodes = 20  # Reduced for faster execution
-    print(f"\nTraining for {num_episodes} episodes (reduced for quick plot generation)...")
-    history, best_params = train_rl_agent(env, agent, num_episodes=num_episodes)
-    
-    # Save training history
-    save_training_history(history)
-    
-    # Plot results (publication quality)
-    print("\nGenerating publication-quality plots...")
-    plot_training_history(history, save_path='nmpc_rl_tuning_results.png', dpi=300)
-    
-    print("\n" + "=" * 70)
-    print("PLOT GENERATION COMPLETE")
-    print("=" * 70)
-    print(f"Plots saved to: nmpc_rl_tuning_results.png")
-    print(f"Training history saved to: nmpc_training_history.json")
-    print("=" * 70)
+    print("Running:")
+    print("  " + " ".join(cmd))
+    print()
+
+    subprocess.check_call(cmd)
+
+    print()
+    print("Next (paper comparison):")
+    print("  python examples/compare_nmpc_for_paper.py")
 

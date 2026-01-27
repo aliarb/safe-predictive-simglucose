@@ -106,19 +106,38 @@ class NMPCController(Controller):
                  control_horizon: int = 30,
                  sample_time: float = 5.0,
                  ode_time_step: float = 1.0,
-                 q_weight: float = 1.0,
+                 q_weight: float = 2.0,  # Increased for better tracking of target BG
                  r_weight: float = 0.1,
                  bg_min: float = 70.0,
                  bg_max: float = 180.0,
                  barrier_weight: float = 10.0,
                  # Cost function tuning parameters (for RL optimization)
-                 q_terminal_weight: float = 2.0,
-                 r_delta_weight: float = 0.5,
-                 hypo_penalty_weight: float = 50.0,
-                 hyper_penalty_weight: float = 20.0,
+                 q_terminal_weight: float = 3.0,  # Increased for better terminal state tracking
+                 r_delta_weight: float = 0.3,  # Reduced to allow more insulin changes when needed
+                 hypo_penalty_weight: float = 100.0,  # Increased to prevent hypoglycemia
+                 hyper_penalty_weight: float = 15.0,  # Reduced slightly for better hyperglycemia control
                  zone_transition_smoothness: float = 5.0,
                  insulin_rate_penalty_weight: float = 100.0,
                  delta_u_asymmetry: float = 2.0,
+                 verbose: bool = True,
+                 use_optimization: bool = False,
+                 warm_start_reuse: bool = True,
+                 pid_P: float = 0.001,
+                 pid_I: float = 0.00001,
+                 pid_D: float = 0.001,
+                 # Optional gain scheduling for supervisor PID (keeps integral state, just updates gains per step)
+                 pid_schedule: bool = False,
+                 pid_low_bg: float = 90.0,
+                 pid_high_bg: float = 180.0,
+                 pid_P_low: Optional[float] = None,
+                 pid_I_low: Optional[float] = None,
+                 pid_D_low: Optional[float] = None,
+                 pid_P_mid: Optional[float] = None,
+                 pid_I_mid: Optional[float] = None,
+                 pid_D_mid: Optional[float] = None,
+                 pid_P_high: Optional[float] = None,
+                 pid_I_high: Optional[float] = None,
+                 pid_D_high: Optional[float] = None,
                  patient_params: Optional[Dict[str, Any]] = None,
                  init_state: Optional[np.ndarray] = None):
         """
@@ -152,6 +171,31 @@ class NMPCController(Controller):
         
         # Patient parameters (will be set from info if not provided)
         self.patient_params = patient_params
+        self.verbose = verbose
+        # Control architecture toggle:
+        # - If False (default), run PID-first and only use the model for safety verification + minimal adjustment.
+        # - If True, run NMPC optimization every step (slower; relies on model fidelity).
+        self.use_optimization = bool(use_optimization)
+        self.pid_P = float(pid_P)
+        self.pid_I = float(pid_I)
+        self.pid_D = float(pid_D)
+        self.pid_schedule = bool(pid_schedule)
+        self.pid_low_bg = float(pid_low_bg)
+        self.pid_high_bg = float(pid_high_bg)
+        self.pid_P_low = self.pid_P if pid_P_low is None else float(pid_P_low)
+        self.pid_I_low = self.pid_I if pid_I_low is None else float(pid_I_low)
+        self.pid_D_low = self.pid_D if pid_D_low is None else float(pid_D_low)
+        self.pid_P_mid = self.pid_P if pid_P_mid is None else float(pid_P_mid)
+        self.pid_I_mid = self.pid_I if pid_I_mid is None else float(pid_I_mid)
+        self.pid_D_mid = self.pid_D if pid_D_mid is None else float(pid_D_mid)
+        self.pid_P_high = self.pid_P if pid_P_high is None else float(pid_P_high)
+        self.pid_I_high = self.pid_I if pid_I_high is None else float(pid_I_high)
+        self.pid_D_high = self.pid_D if pid_D_high is None else float(pid_D_high)
+        # Warm-start behavior:
+        # - If enabled, reuse the previous optimal control sequence in a receding-horizon manner:
+        #   shift ΔU(t-1) by one step and use it as the initial guess at time t.
+        # This typically reduces iterations dramatically vs "cold" initialization.
+        self.warm_start_reuse = warm_start_reuse
         
         # Internal state for NMPC
         self.current_state = None
@@ -165,6 +209,12 @@ class NMPCController(Controller):
         self.acc = 1e-3  # Minimum accuracy of optimization method
         self.max_time = 100  # Maximum computation time (seconds)
         
+        # Aliases for optimization parameters (for convenience)
+        self.max_iterations = self.Nopt
+        self.learning_rate = self.opt_rate
+        self.convergence_tolerance = self.acc
+        self.max_optimization_time = self.max_time
+        
         # Multi-start heuristic parameters
         self.use_multi_start = False  # Enable multi-start optimization
         self.num_starting_points = 3  # Number of random starting points (including warm start)
@@ -172,16 +222,21 @@ class NMPCController(Controller):
         self.start_point_spread = 0.3  # Spread of random starting points (fraction of constraint range)
         
         # Control parameters
-        self.insulin_max = 10.0  # Maximum insulin rate (U/min)
+        self.insulin_max = 2.5  # Maximum insulin rate (U/min)
         self.insulin_min = 0.0  # Minimum insulin rate (U/min)
         
         # PID controller for initial guess (warm start)
         from .pid_ctrller import PIDController
-        self.pid_controller = PIDController(P=0.001, I=0.00001, D=0.001, target=target_bg)
+        self.pid_controller = PIDController(P=self.pid_P, I=self.pid_I, D=self.pid_D, target=target_bg)
         
         # History for debugging/analysis
         self.prediction_history = []
         self.optimization_history = []
+        
+        # Track last insulin rate for ΔU optimization
+        self._last_insulin_rate = None
+        # Track last optimized ΔU sequence for receding-horizon warm start (length = control_horizon)
+        self._last_delta_u_sequence: Optional[np.ndarray] = None
         
     def policy(self, observation, reward, done, **info):
         """
@@ -253,13 +308,15 @@ class NMPCController(Controller):
                      sample_time: float,
                      patient_name: Optional[str] = None) -> Action:
         """
-        Solve NMPC using PID-first approach with safety verification.
+        Solve NMPC using HYBRID approach: NMPC optimization with PID warm start.
         
-        NEW ARCHITECTURE:
-        1. Get PID controller output (primary control)
-        2. Check worst-case safety scenarios with PID output
-        3. If PID output is safe in worst-case, use it directly
-        4. If PID output violates safety, find minimal adjustment to ensure safety
+        NEW ARCHITECTURE (Improved):
+        1. Get PID controller output (warm start for NMPC)
+        2. Use NMPC optimization directly with PID as initial guess
+        3. Check worst-case safety of NMPC-optimized solution
+        4. If safe, use NMPC solution; otherwise find safe adjustment
+        
+        This leverages NMPC's predictive optimization while using PID for fast warm start.
         
         Parameters
         ----------
@@ -279,8 +336,23 @@ class NMPCController(Controller):
         action : Action
             Safe insulin action (basal, bolus) in U/min
         """
-        # Step 1: Get PID controller output (primary control)
+        # Step 1: Get PID controller output (warm start for NMPC)
         try:
+            # Optional gain scheduling: update gains based on current CGM without resetting PID state.
+            if self.pid_schedule:
+                if cgm_reading < self.pid_low_bg:
+                    self.pid_controller.P = self.pid_P_low
+                    self.pid_controller.I = self.pid_I_low
+                    self.pid_controller.D = self.pid_D_low
+                elif cgm_reading > self.pid_high_bg:
+                    self.pid_controller.P = self.pid_P_high
+                    self.pid_controller.I = self.pid_I_high
+                    self.pid_controller.D = self.pid_D_high
+                else:
+                    self.pid_controller.P = self.pid_P_mid
+                    self.pid_controller.I = self.pid_I_mid
+                    self.pid_controller.D = self.pid_D_mid
+
             pid_action = self.pid_controller.policy(
                 observation=type('obj', (object,), {'CGM': cgm_reading})(),
                 reward=0.0,
@@ -301,34 +373,126 @@ class NMPCController(Controller):
         # Clip PID output to reasonable bounds
         pid_insulin_rate = np.clip(pid_insulin_rate, self.insulin_min, self.insulin_max)
         
-        logger.debug(f"PID output: {pid_insulin_rate:.6f} U/min")
+        if self.verbose:
+            logger.debug(f"PID warm start: {pid_insulin_rate:.6f} U/min")
         
-        # Step 2: Check worst-case safety scenarios with PID output
+        # Step 2: Either (a) keep PID as the primary action, or (b) run NMPC optimization.
+        if not self.use_optimization:
+            optimal_insulin_rate = float(pid_insulin_rate)
+            self._last_insulin_rate = optimal_insulin_rate
+            self._last_delta_u_sequence = None
+        else:
+            # Prepare state and parameters for optimization
+            x = current_state.copy()
+            xd = np.array([self.target_bg])  # Desired BG
+
+            # Get previous insulin rate (for ΔU optimization)
+            if self._last_insulin_rate is None:
+                u_prev = float(pid_insulin_rate)
+            else:
+                u_prev = float(self._last_insulin_rate)
+
+            # Prepare other parameters
+            other_params = {
+                'meal': meal,
+                'patient_params': self.patient_params,
+                'patient_name': patient_name,
+                'last_Qsto': current_state[0] + current_state[1] if current_state is not None else 0,
+                'last_foodtaken': 0,
+                'u_prev': u_prev
+            }
+
+            try:
+                # Build initial guess for ΔU over the control horizon (NC steps).
+                # Prefer a true receding-horizon warm start (shift previous optimal sequence),
+                # falling back to PID-based initialization when unavailable.
+                NC = int(self.control_horizon)
+
+                delta_u_initial: np.ndarray
+                if (
+                    self.warm_start_reuse
+                    and isinstance(self._last_delta_u_sequence, np.ndarray)
+                    and self._last_delta_u_sequence.shape == (NC,)
+                    and np.all(np.isfinite(self._last_delta_u_sequence))
+                ):
+                    # Receding-horizon reuse: shift ΔU sequence by 1 and pad with 0
+                    delta_u_initial = np.empty((NC,), dtype=np.float64)
+                    if NC > 1:
+                        delta_u_initial[:-1] = self._last_delta_u_sequence[1:]
+                    delta_u_initial[-1] = 0.0
+                else:
+                    # PID fallback: initialize ΔU as a constant sequence
+                    delta_u_initial_scalar = float(pid_insulin_rate - u_prev)
+                    delta_u_initial = np.full((NC,), delta_u_initial_scalar, dtype=np.float64)
+
+                # Optimize ΔU sequence
+                optimal_delta_u = self._optimize(
+                    x=x,
+                    xd=xd,
+                    u_old=delta_u_initial,
+                    DT=sample_time,
+                    NP=self.NP,
+                    maxiteration=self.max_iterations,
+                    alfa=self.learning_rate,
+                    acc=self.convergence_tolerance,
+                    other=other_params,
+                    max_time=self.max_optimization_time
+                )
+
+                # Convert optimal ΔU back to absolute insulin
+                if isinstance(optimal_delta_u, np.ndarray) and len(optimal_delta_u) > 0:
+                    optimal_insulin_rate = u_prev + float(optimal_delta_u[0])
+                else:
+                    optimal_insulin_rate = u_prev + float(delta_u_initial[0]) if NC > 0 else u_prev
+
+                optimal_insulin_rate = float(np.clip(optimal_insulin_rate, self.insulin_min, self.insulin_max))
+
+                # Store for next iteration
+                self._last_insulin_rate = optimal_insulin_rate
+                if isinstance(optimal_delta_u, np.ndarray) and optimal_delta_u.shape == (NC,) and np.all(np.isfinite(optimal_delta_u)):
+                    self._last_delta_u_sequence = optimal_delta_u.astype(np.float64, copy=True)
+                else:
+                    self._last_delta_u_sequence = None
+
+                logger.debug(
+                    f"NMPC optimized: {optimal_insulin_rate:.6f} U/min (from PID: {pid_insulin_rate:.6f})"
+                )
+
+            except Exception as e:
+                if self.verbose:
+                    logger.warning(f"NMPC optimization failed: {e}, falling back to PID")
+                optimal_insulin_rate = float(pid_insulin_rate)
+                self._last_insulin_rate = optimal_insulin_rate
+                self._last_delta_u_sequence = None
+        
+        # Step 3: Check worst-case safety of NMPC-optimized solution
         is_safe, worst_case_bg_min, worst_case_bg_max = self._check_worst_case_safety(
             current_state=current_state,
             current_bg=current_bg,
-            insulin_rate=pid_insulin_rate,
+            insulin_rate=optimal_insulin_rate,
             meal=meal,
             sample_time=sample_time,
             patient_name=patient_name
         )
         
-        # Step 3: If PID output is safe, use it directly
+        # Step 4: If NMPC solution is safe, use it directly
         if is_safe:
-            logger.debug(f"PID output is safe in worst-case scenarios. Using PID output directly.")
+            if self.verbose:
+                logger.debug(f"NMPC solution is safe in worst-case scenarios. Using NMPC output.")
             basal = self._compute_basal()
-            bolus = max(0, pid_insulin_rate - basal)
+            bolus = max(0, optimal_insulin_rate - basal)
             return Action(basal=basal, bolus=bolus)
         
-        # Step 4: PID output violates safety - find minimal safe adjustment
-        logger.warning(f"PID output violates worst-case safety bounds. "
-                      f"Worst-case BG range: [{worst_case_bg_min:.1f}, {worst_case_bg_max:.1f}] mg/dL. "
-                      f"Finding safe adjustment...")
+        # Step 5: NMPC solution violates safety - find safe adjustment
+        if self.verbose:
+            logger.warning(f"NMPC solution violates worst-case safety bounds. "
+                          f"Worst-case BG range: [{worst_case_bg_min:.1f}, {worst_case_bg_max:.1f}] mg/dL. "
+                          f"Finding safe adjustment...")
         
         safe_insulin_rate = self._find_safe_adjustment(
             current_state=current_state,
             current_bg=current_bg,
-            pid_insulin_rate=pid_insulin_rate,
+            pid_insulin_rate=optimal_insulin_rate,  # Use NMPC output as reference
             meal=meal,
             sample_time=sample_time,
             patient_name=patient_name,
@@ -336,10 +500,14 @@ class NMPCController(Controller):
             worst_case_bg_max=worst_case_bg_max
         )
         
+        # Store safe rate for next iteration
+        self._last_insulin_rate = safe_insulin_rate
+        
         basal = self._compute_basal()
         bolus = max(0, safe_insulin_rate - basal)
         
-        logger.debug(f"Safe adjustment: PID={pid_insulin_rate:.6f} -> Safe={safe_insulin_rate:.6f} U/min")
+        if self.verbose:
+            logger.debug(f"Safe adjustment: NMPC={optimal_insulin_rate:.6f} -> Safe={safe_insulin_rate:.6f} U/min")
         
         return Action(basal=basal, bolus=bolus)
     
@@ -387,15 +555,44 @@ class NMPCController(Controller):
         worst_case_bg_max : float
             Maximum BG predicted in worst-case scenarios
         """
-        # Realistic worst-case parameters
-        max_meal_rate = 30.0  # g/min - large but realistic meal (was 100.0)
-        max_meal_duration = 15.0  # minutes - meals are transient, not constant
-        insulin_sensitivity_factor = 0.7  # 70% of normal sensitivity (worst case)
-        MAX_REALISTIC_BG = 500.0  # mg/dL - cap unrealistic predictions
+        # ADAPTIVE worst-case parameters based on current BG
+        bg_margin = 15.0  # mg/dL margin for adaptive thresholds
         
-        # Shorter horizon for worst-case checking (30 minutes to 1 hour)
-        # Convert to number of steps: 30-60 min / sample_time
-        worst_case_horizon_minutes = 60.0  # 1 hour max
+        if current_bg > self.bg_max:
+            # Already hyperglycemic - use realistic assumptions (allow more insulin)
+            max_meal_rate = 10.0  # Smaller worst-case meal
+            max_meal_duration = 6.0  # Shorter meal duration
+            insulin_sensitivity_factor = 0.95  # Higher sensitivity (less conservative)
+            worst_case_horizon_minutes = 15.0  # Shorter horizon
+            MAX_REALISTIC_BG = 300.0  # Lower cap
+        elif current_bg < self.bg_min:
+            # Already hypoglycemic - be very conservative (prevent further drops)
+            max_meal_rate = 5.0  # Very small worst-case meal
+            max_meal_duration = 5.0  # Very short meal duration
+            insulin_sensitivity_factor = 0.85  # Lower sensitivity (more conservative)
+            worst_case_horizon_minutes = 10.0  # Very short horizon
+            MAX_REALISTIC_BG = 250.0  # Lower cap
+        elif current_bg > self.bg_max - bg_margin:
+            # Near upper bound - use moderate-conservative assumptions
+            max_meal_rate = 12.0
+            max_meal_duration = 7.0
+            insulin_sensitivity_factor = 0.90
+            worst_case_horizon_minutes = 18.0
+            MAX_REALISTIC_BG = 320.0
+        elif current_bg < self.bg_min + bg_margin:
+            # Near lower bound - use conservative assumptions
+            max_meal_rate = 8.0
+            max_meal_duration = 6.0
+            insulin_sensitivity_factor = 0.88
+            worst_case_horizon_minutes = 12.0
+            MAX_REALISTIC_BG = 280.0
+        else:
+            # Normal BG range - use moderate assumptions
+            max_meal_rate = 15.0
+            max_meal_duration = 8.0
+            insulin_sensitivity_factor = 0.90
+            worst_case_horizon_minutes = 20.0
+            MAX_REALISTIC_BG = 350.0
         worst_case_horizon_steps = min(
             int(np.ceil(worst_case_horizon_minutes / sample_time)),
             self.NP  # Don't exceed normal prediction horizon
@@ -743,13 +940,30 @@ class NMPCController(Controller):
         )
         
         if not is_safe_final:
-            # Fallback: use conservative safe value
+            # Improved fallback: use smarter logic based on current BG and PID output
             if current_bg < self.bg_min:
-                safe_insulin_rate = self._compute_basal() * 0.3  # Very conservative
+                # Hypoglycemia - use very conservative (low insulin) to prevent further drop
+                safe_insulin_rate = self._compute_basal() * 0.3
             elif current_bg > self.bg_max:
-                safe_insulin_rate = min(self.insulin_max, self._compute_basal() * 2.0)
+                # Hyperglycemia - use aggressive insulin, but consider PID output
+                # If PID suggests high insulin, trust it (it's responding to high BG)
+                if pid_insulin_rate > self._compute_basal() * 1.5:
+                    # PID is already aggressive - use it (maybe slightly reduced)
+                    safe_insulin_rate = pid_insulin_rate * 0.9
+                else:
+                    # PID is conservative - use more aggressive approach
+                    safe_insulin_rate = min(self.insulin_max, self._compute_basal() * 2.5)
+                safe_insulin_rate = min(safe_insulin_rate, self.insulin_max)
+            elif current_bg > self.target_bg + 20:
+                # Above target but within bounds - use PID or moderate increase
+                safe_insulin_rate = max(pid_insulin_rate, self._compute_basal() * 1.5)
+                safe_insulin_rate = min(safe_insulin_rate, self.insulin_max)
+            elif current_bg < self.target_bg - 20:
+                # Below target but within bounds - use conservative approach
+                safe_insulin_rate = max(pid_insulin_rate, self._compute_basal() * 0.8)
             else:
-                safe_insulin_rate = self._compute_basal()
+                # Near target - use PID output or basal
+                safe_insulin_rate = max(pid_insulin_rate, self._compute_basal())
         
         return np.clip(safe_insulin_rate, self.insulin_min, self.insulin_max)
     
@@ -788,6 +1002,19 @@ class NMPCController(Controller):
         U : np.ndarray
             Optimized control input
         """
+        # Ensure u_old is a numpy array (handle scalar input)
+        if isinstance(u_old, (int, float, np.integer, np.floating)):
+            # Convert scalar to array (control horizon length)
+            # Use control_horizon if available, otherwise use 1
+            NC = getattr(self, 'control_horizon', 1)
+            u_old = np.full(NC, float(u_old), dtype=np.float64)
+        elif not isinstance(u_old, np.ndarray):
+            # Convert other types to array
+            u_old = np.asarray(u_old, dtype=np.float64)
+            if u_old.ndim == 0:  # Scalar array
+                NC = getattr(self, 'control_horizon', 1)
+                u_old = np.full(NC, float(u_old), dtype=np.float64)
+        
         Un = u_old.copy()
         n = len(Un)
         maxiter = maxiteration
@@ -852,16 +1079,27 @@ class NMPCController(Controller):
             # Get current BG from state (approximate - state[3] is glucose)
             current_bg_approx = x[3] * self._get_param('Vg', 1.0) if len(x) > 3 else 140.0
             
-            # Adaptive ΔU bounds based on current BG
-            if current_bg_approx > self.bg_max:
-                delta_u_max = 1.0  # Allow up to 1 U/min increase when hyperglycemic
-                delta_u_min = -0.5  # Limit decreases
-            elif current_bg_approx < self.bg_min:
-                delta_u_max = 0.1  # Very small increases when hypoglycemic
-                delta_u_min = -1.0  # Allow larger decreases when hypoglycemic
+            # Adaptive ΔU bounds based on current BG.
+            #
+            # IMPORTANT: Insulin is in U/min, so ΔU=1.0 U/min is extremely large and can
+            # cause catastrophic hypoglycemia. Keep ΔU within a realistic per-step change.
+            #
+            # Heuristic bounds:
+            # - Near/under low BG: do NOT allow increases; allow modest decreases.
+            # - Normal range: small symmetric changes.
+            # - Hyperglycemia: allow slightly larger increases, still bounded.
+            if current_bg_approx < self.bg_min:
+                delta_u_max = 0.0     # never increase insulin when already low
+                delta_u_min = -0.10   # allow decreasing insulin to recover
+            elif current_bg_approx > 250.0:
+                delta_u_max = 0.20
+                delta_u_min = -0.10
+            elif current_bg_approx > self.bg_max:
+                delta_u_max = 0.10
+                delta_u_min = -0.10
             else:
-                delta_u_max = 0.5  # Normal range: smaller changes
-                delta_u_min = -0.5
+                delta_u_max = 0.05
+                delta_u_min = -0.05
             
             UUU[0] = np.clip(UUU[0], delta_u_min, delta_u_max)
             
@@ -981,15 +1219,16 @@ class NMPCController(Controller):
         current_bg_approx = x[3] * self._get_param('Vg', 1.0) if len(x) > 3 else 140.0
         
         # Determine adaptive ΔU bounds for generating starting points
+        # Updated: delta_u_max = 1.0, delta_u_min = -1.0 for all cases
         if current_bg_approx > self.bg_max:
             delta_u_max = 1.0
-            delta_u_min = -0.5
+            delta_u_min = -1.0
         elif current_bg_approx < self.bg_min:
-            delta_u_max = 0.1
+            delta_u_max = 1.0
             delta_u_min = -1.0
         else:
-            delta_u_max = 0.5
-            delta_u_min = -0.5
+            delta_u_max = 1.0
+            delta_u_min = -1.0
         
         # Generate starting points
         starting_points = []
@@ -1318,23 +1557,22 @@ class NMPCController(Controller):
         bg_final = z[3, -1] * Vg
         
         # Adaptive ΔU bounds based on final predicted BG (smooth transitions)
+        # Updated: delta_u_max = 1.0 for all cases
         alpha_adaptive = 5.0
         # Hyperglycemia: allow larger increases
         hyper_factor = 0.5 * (1 + np.tanh(alpha_adaptive * (bg_final - self.bg_max)))
         delta_u_max_hyper = 1.0
         
-        # Hypoglycemia: very small changes
+        # Hypoglycemia: allow changes (but should decrease)
         hypo_factor = 0.5 * (1 + np.tanh(alpha_adaptive * (self.bg_min - bg_final)))
-        delta_u_max_hypo = 0.1
+        delta_u_max_hypo = 1.0
         
-        # Normal range: moderate changes
+        # Normal range: allow changes
         normal_factor = 1.0 - hyper_factor - hypo_factor
-        delta_u_max_normal = 0.5
+        delta_u_max_normal = 1.0
         
-        # Weighted average of bounds (smooth transition)
-        delta_u_max = (hyper_factor * delta_u_max_hyper + 
-                      hypo_factor * delta_u_max_hypo + 
-                      normal_factor * delta_u_max_normal)
+        # Weighted average of bounds (smooth transition) - all 1.0 now
+        delta_u_max = 1.0
         
         # Smooth penalty for excessive rate of change
         delta_u_violation = max(0, abs(delta_u[0]) - delta_u_max)

@@ -39,7 +39,21 @@ class SimObj(object):
         logger.info('Simulation took {} seconds.'.format(toc - tic))
 
     def results(self):
-        return self.env.show_history()
+        df = self.env.show_history()
+        # Optional: controllers may expose a debug dataframe indexed by Time.
+        # This allows adding controller-side signals (e.g., event-trigger diagnostics)
+        # into the saved CSV without changing the env/action interface.
+        get_dbg = getattr(self.controller, "get_debug_df", None)
+        if callable(get_dbg):
+            try:
+                dbg_df = get_dbg()
+                # Join on Time index; keep original rows intact.
+                if dbg_df is not None and getattr(dbg_df, "empty", True) is False:
+                    df = df.join(dbg_df, how="left")
+            except Exception:
+                # Never break simulation due to optional logging.
+                pass
+        return df
 
     def save_results(self):
         df = self.results()

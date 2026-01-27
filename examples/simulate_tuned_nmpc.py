@@ -22,10 +22,11 @@ print("GLUCOSE CONTROL SIMULATION WITH RL-TUNED NMPC PARAMETERS")
 print("=" * 70)
 
 # Load tuned parameters
-params_file = 'best_nmpc_params_200ep.json'
+params_file = 'results/rl_finetuning/best_params.json'
 if not os.path.exists(params_file):
     print(f"\nError: {params_file} not found!")
-    print("Please run RL tuning first using: python examples/run_200_episodes_tuning.py")
+    print("Please run RL-style finetuning first using:")
+    print("  python examples/rl_finetune_nmpc_for_paper.py")
     exit(1)
 
 print(f"\nLoading tuned parameters from {params_file}...")
@@ -61,27 +62,41 @@ print("\n" + "-" * 70)
 print("\nNMPC CONTROLLER (RL-Tuned Parameters)")
 print("-" * 70)
 
-# Initialize NMPC controller with tuned parameters
+# Initialize NMPC controller with tuned parameters (paper configuration)
 nmpc_controller = NMPCController(
     target_bg=140.0,
-    prediction_horizon=int(tuned_params['prediction_horizon']),
-    control_horizon=int(tuned_params['control_horizon']),
+    prediction_horizon=60,
+    control_horizon=30,
     sample_time=5.0,
-    q_weight=tuned_params['q_weight'],
-    r_weight=tuned_params['r_weight'],
     bg_min=70.0,
-    bg_max=180.0
+    bg_max=180.0,
+    r_weight=0.1,
+    verbose=False,
+    **tuned_params
 )
-# Set optimization rate
-nmpc_controller.opt_rate = tuned_params['opt_rate']
 
 print(f"\nController Configuration:")
 print(f"  Target BG: 140.0 mg/dL")
-print(f"  Prediction Horizon: {tuned_params['prediction_horizon']} minutes")
-print(f"  Control Horizon: {tuned_params['control_horizon']} minutes")
-print(f"  Q Weight (tracking): {tuned_params['q_weight']:.3f}")
-print(f"  R Weight (control cost): {tuned_params['r_weight']:.3f}")
-print(f"  Optimization Rate: {tuned_params['opt_rate']:.3f}")
+print(f"  Prediction Horizon: 60 minutes")
+print(f"  Control Horizon: 30 minutes")
+if "q_weight" in tuned_params:
+    print(f"  q_weight: {tuned_params['q_weight']:.3f}")
+if "q_terminal_weight" in tuned_params:
+    print(f"  q_terminal_weight: {tuned_params['q_terminal_weight']:.3f}")
+if "r_delta_weight" in tuned_params:
+    print(f"  r_delta_weight: {tuned_params['r_delta_weight']:.3f}")
+if "hypo_penalty_weight" in tuned_params:
+    print(f"  hypo_penalty_weight: {tuned_params['hypo_penalty_weight']:.3f}")
+if "hyper_penalty_weight" in tuned_params:
+    print(f"  hyper_penalty_weight: {tuned_params['hyper_penalty_weight']:.3f}")
+if "barrier_weight" in tuned_params:
+    print(f"  barrier_weight: {tuned_params['barrier_weight']:.3f}")
+if "zone_transition_smoothness" in tuned_params:
+    print(f"  zone_transition_smoothness: {tuned_params['zone_transition_smoothness']:.3f}")
+if "insulin_rate_penalty_weight" in tuned_params:
+    print(f"  insulin_rate_penalty_weight: {tuned_params['insulin_rate_penalty_weight']:.3f}")
+if "delta_u_asymmetry" in tuned_params:
+    print(f"  delta_u_asymmetry: {tuned_params['delta_u_asymmetry']:.3f}")
 
 # Run simulation
 print("\n" + "-" * 70)

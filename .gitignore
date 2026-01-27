@@ -3,6 +3,7 @@
 
 # Virtual environment
 venv/
+Paper/
 
 # results foler
 /results/

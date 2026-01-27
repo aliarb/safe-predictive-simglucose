@@ -2,6 +2,11 @@
 """
 Reinforcement Learning for Tuning NMPC Controller Parameters
 
+DEPRECATED (paper workflow):
+For paper-ready finetuning that reliably finishes and saves
+`results/rl_finetuning/best_params.json` + plots, use:
+  python examples/rl_finetune_nmpc_for_paper.py
+
 This script uses RL to learn optimal NMPC hyperparameters (q_weight, r_weight,
 prediction_horizon, control_horizon, opt_rate) for glucose control.
 

@@ -90,33 +90,27 @@ print("   ✓ Complete")
 # ========== 4. NMPC CONTROLLER (RL-Tuned Parameters) ==========
 print("\n4. Running NMPC Controller (RL-Tuned Parameters)...")
 # Load tuned parameters
-params_file = 'best_nmpc_params_200ep.json'
+params_file = 'results/rl_finetuning/best_params.json'
 if os.path.exists(params_file):
     with open(params_file, 'r') as f:
         tuned_params = json.load(f)
     print(f"   Using parameters from {params_file}")
 else:
-    print("   Warning: Tuned parameters not found, using defaults")
-    tuned_params = {
-        'q_weight': 1.0,
-        'r_weight': 0.1,
-        'prediction_horizon': 60,
-        'control_horizon': 30,
-        'opt_rate': 1.0
-    }
+    print("   Warning: Tuned parameters not found, using baseline Safe-NMPC defaults")
+    tuned_params = {}
 
 env4 = T1DSimEnv(patient, sensor, pump, scenario)
 controller4 = NMPCController(
     target_bg=140.0,
-    prediction_horizon=int(tuned_params['prediction_horizon']),
-    control_horizon=int(tuned_params['control_horizon']),
+    prediction_horizon=60,
+    control_horizon=30,
     sample_time=5.0,
-    q_weight=tuned_params['q_weight'],
-    r_weight=tuned_params['r_weight'],
     bg_min=70.0,
-    bg_max=180.0
+    bg_max=180.0,
+    r_weight=0.1,
+    verbose=False,
+    **tuned_params
 )
-controller4.opt_rate = tuned_params['opt_rate']
 sim_obj4 = SimObj(env4, controller4, timedelta(days=1), animate=False, path=path)
 results4 = sim(sim_obj4)
 all_results['NMPC (RL-Tuned)'] = results4
